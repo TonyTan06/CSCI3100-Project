@@ -1,0 +1,30 @@
+# Ruby
+/.bundle/
+/vendor/bundle/
+
+# Rails temporary files
+/log/*
+!/log/.keep
+/tmp/*
+!/tmp/.keep
+
+# Database and local storage
+/storage/*
+!/storage/.keep
+/db/*.sqlite3*
+
+# Sensitive files
+/config/master.key
+/config/credentials/*.key
+/.kamal/secrets
+/.env
+/.env.*
+!/.env.example
+
+# Generated files
+/public/assets/
+/node_modules/
+/coverage/
+
+# macOS
+.DS_Store
