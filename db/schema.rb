@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_18_025135) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_19_053218) do
+  create_table "activities", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.string "location", null: false
+    t.integer "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_activities_on_organization_id"
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -26,6 +36,28 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_18_025135) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "shifts", force: :cascade do |t|
+    t.integer "activity_id", null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
+    t.integer "capacity", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_shifts_on_activity_id"
+  end
+
+  create_table "signups", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "shift_id", null: false
+    t.string "status", null: false
+    t.string "attendance_status", default: "pending", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shift_id"], name: "index_signups_on_shift_id"
+    t.index ["user_id", "shift_id"], name: "index_signups_on_user_id_and_shift_id", unique: true
+    t.index ["user_id"], name: "index_signups_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "password_digest", null: false
@@ -37,6 +69,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_18_025135) do
     t.index ["organization_id"], name: "index_users_on_organization_id"
   end
 
+  add_foreign_key "activities", "organizations"
   add_foreign_key "sessions", "users"
+  add_foreign_key "shifts", "activities"
+  add_foreign_key "signups", "shifts"
+  add_foreign_key "signups", "users"
   add_foreign_key "users", "organizations"
 end
