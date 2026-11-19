@@ -27,6 +27,9 @@ class Shift < ApplicationRecord
   # 班次容量不能低于已确认报名人数
   validate :capacity_must_not_be_below_confirmed_count
 
+  # 修改班次时间不能造成已有报名的时间冲突
+  validate :time_change_must_not_cause_conflicts
+
   # 统计当前班次已确认的报名人数
   def confirmed_count
     signups.where(status: "confirmed").count
@@ -70,6 +73,50 @@ class Shift < ApplicationRecord
       errors.add(
         :capacity,
         "cannot be less than the number of confirmed signups"
+      )
+    end
+  end
+
+  # 自定义班次时间修改保护方法
+  def time_change_must_not_cause_conflicts
+    # 1. 如果班次尚未保存，则跳过验证
+    return if new_record?
+
+    # 2. 如果开始时间或结束时间为空，则跳过验证
+    return if start_time.blank? || end_time.blank?
+
+    # 3. 如果班次时间本身不合法，则跳过验证
+    return if end_time <= start_time
+
+    # 4. 如果班次时间没有发生修改，则跳过验证
+    return unless will_save_change_to_start_time? ||
+                  will_save_change_to_end_time?
+
+    # 5. 获取当前班次中所有已确认 Volunteer 的 ID
+    confirmed_user_ids = signups
+      .where(status: "confirmed")
+      .select(:user_id)
+
+    # 6. 获取这些 Volunteer 在其他班次中的已确认报名
+    other_confirmed_signups = Signup
+      .where(user_id: confirmed_user_ids)
+      .where(status: "confirmed")
+      .where.not(shift_id: id)
+
+    # 7. 检查修改后的班次时间是否与其他班次重叠
+    overlapping_signups = other_confirmed_signups
+      .joins(:shift)
+      .where(
+        "shifts.start_time < ? AND shifts.end_time > ?",
+        end_time,
+        start_time
+      )
+
+    # 8. 如果存在时间冲突，则拒绝修改班次时间
+    if overlapping_signups.exists?
+      errors.add(
+        :base,
+        "time change conflicts with another confirmed signup"
       )
     end
   end
