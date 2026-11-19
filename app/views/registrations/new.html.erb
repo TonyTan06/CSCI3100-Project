@@ -1,0 +1,36 @@
+
+<h1>VolunteerHub - Register</h1>
+
+<p>Create your VolunteerHub account.</p>
+
+<% if @user&.errors&.any? %>
+  <div>
+    <h2>Registration failed</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with scope: :user, url: registration_path do |form| %>
+  <div>
+    <%= form.label :email_address, "Email Address" %>
+    <%= form.email_field :email_address %>
+  </div>
+
+  <div>
+    <%= form.label :password, "Password" %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div>
+    <%= form.label :password_confirmation, "Confirm Password" %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+
+  <div>
+    <%= form.submit "Create Account" %>
+  </div>
+<% end %>
