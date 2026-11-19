@@ -24,6 +24,12 @@ class Signup < ApplicationRecord
     scope: :shift_id
   }
 
+  # 防止已确认报名人数超过班次容量
+  validate :shift_must_have_available_capacity
+
+  # 防止同一个 Volunteer 报名时间重叠的班次
+  validate :shift_must_not_overlap
+
   private
 
   # 自定义用户角色验证方法
@@ -35,6 +41,64 @@ class Signup < ApplicationRecord
     if user.role != "volunteer"
       # 3. 添加自定义错误信息
       errors.add(:user, "must be a volunteer")
+    end
+  end
+
+  # 自定义班次容量验证方法
+  def shift_must_have_available_capacity
+    # 1. 如果 Shift 不存在，则跳过容量验证
+    return if shift.blank?
+
+    # 2. 仅对已确认报名进行容量验证
+    return unless status == "confirmed"
+
+    # 3. 如果班次容量尚未设置，则跳过容量验证
+    return if shift.capacity.blank?
+
+    # 4. 统计当前班次的其他已确认报名记录
+    confirmed_count = shift.signups
+                           .where(status: "confirmed")
+                           .where.not(id: id)
+                           .count
+
+    # 5. 检查班次是否还有可用名额
+    if confirmed_count >= shift.capacity
+      # 6. 添加自定义错误信息
+      errors.add(:shift, "has reached its capacity")
+    end
+  end
+
+  # 自定义报名时间冲突验证方法
+  def shift_must_not_overlap
+    # 1. 如果 User 或 Shift 不存在，则跳过验证
+    return if user.blank? || shift.blank?
+
+    # 2. 仅对已确认报名进行时间冲突验证
+    return unless status == "confirmed"
+
+    # 3. 如果班次开始时间或结束时间为空，则跳过验证
+    return if shift.start_time.blank? || shift.end_time.blank?
+
+    # 4. 获取当前 Volunteer 的其他已确认报名
+    confirmed_signups = user.signups
+                            .where(status: "confirmed")
+                            .where.not(id: id)
+
+    # 5. 检查是否存在时间重叠的班次
+    overlapping_signups = confirmed_signups
+      .joins(:shift)
+      .where(
+        "shifts.start_time < ? AND shifts.end_time > ?",
+        shift.end_time,
+        shift.start_time
+      )
+
+    # 6. 如果存在时间冲突，则添加自定义错误信息
+    if overlapping_signups.exists?
+      errors.add(
+        :shift,
+        "overlaps with another confirmed signup"
+      )
     end
   end
 end
