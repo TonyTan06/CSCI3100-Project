@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_19_053218) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_20_063510) do
   create_table "activities", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
@@ -53,6 +53,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_19_053218) do
     t.string "attendance_status", default: "pending", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "waitlisted_at"
+    t.index ["shift_id", "status", "waitlisted_at"], name: "index_signups_on_waitlist_order"
     t.index ["shift_id"], name: "index_signups_on_shift_id"
     t.index ["user_id", "shift_id"], name: "index_signups_on_user_id_and_shift_id", unique: true
     t.index ["user_id"], name: "index_signups_on_user_id"

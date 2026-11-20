@@ -45,6 +45,13 @@ class Shift < ApplicationRecord
     available_slots <= 0
   end
 
+  # 获取当前班次按照 FIFO 原则排列的候补队列
+  def waitlist_queue
+    signups
+      .where(status: "waitlisted")
+      .order(waitlisted_at: :asc, id: :asc)
+  end
+
   private
 
   # 自定义时间验证方法

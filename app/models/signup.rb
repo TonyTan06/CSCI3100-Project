@@ -30,6 +30,9 @@ class Signup < ApplicationRecord
   # 防止同一个 Volunteer 报名时间重叠的班次
   validate :shift_must_not_overlap
 
+  # 在保存报名记录之前自动管理候补时间
+  before_save :manage_waitlisted_at
+
   private
 
   # 自定义用户角色验证方法
@@ -99,6 +102,28 @@ class Signup < ApplicationRecord
         :shift,
         "overlaps with another confirmed signup"
       )
+    end
+  end
+
+  # 自动管理进入候补队列的时间
+  def manage_waitlisted_at
+    # 1. 检查当前报名状态是否为 waitlisted
+    if status == "waitlisted"
+
+      # 2. 如果是新记录、报名状态发生变化，
+      #    或候补时间为空，则记录当前时间
+      if new_record? ||
+         will_save_change_to_status? ||
+         waitlisted_at.blank?
+
+        self.waitlisted_at = Time.current
+      end
+
+    else
+
+      # 3. 如果当前状态不是 waitlisted，则清空候补时间
+      self.waitlisted_at = nil
+
     end
   end
 end
