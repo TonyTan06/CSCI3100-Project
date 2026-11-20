@@ -1,0 +1,28 @@
+
+<h1><%= @activity.title %></h1>
+
+<p>
+  Organization: <%= @activity.organization.name %>
+</p>
+
+<p>
+  Location: <%= @activity.location %>
+</p>
+
+<p>
+  <%= @activity.description %>
+</p>
+
+<h2>Shifts</h2>
+
+<p>
+  Total Shifts: <%= @activity.shifts.count %>
+</p>
+
+<%= link_to "View Shifts", activity_shifts_path(@activity) %>
+
+<% if Current.user.role == "organizer" %>
+  <%= link_to "Edit Activity", edit_activity_path(@activity) %>
+<% end %>
+
+<%= link_to "Back to Activities", activities_path %>

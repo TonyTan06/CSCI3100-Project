@@ -1,0 +1,29 @@
+<h1>Activities</h1>
+
+<% if Current.user.role == "organizer" %>
+  <%= link_to "Create Activity", new_activity_path %>
+<% end %>
+
+<% if @activities.any? %>
+  <% @activities.each do |activity| %>
+    <article>
+      <h2>
+        <%= link_to activity.title, activity_path(activity) %>
+      </h2>
+
+      <p>
+        Organization: <%= activity.organization.name %>
+      </p>
+
+      <p>
+        Location: <%= activity.location %>
+      </p>
+
+      <p>
+        <%= activity.description %>
+      </p>
+    </article>
+  <% end %>
+<% else %>
+  <p>No activities available.</p>
+<% end %>

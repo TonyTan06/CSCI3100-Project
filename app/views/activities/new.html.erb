@@ -1,0 +1,10 @@
+
+<h1>Create Activity</h1>
+
+<p>
+  Organization: <%= Current.user.organization.name %>
+</p>
+
+<%= render "form", activity: @activity %>
+
+<%= link_to "Back to Activities", activities_path %>

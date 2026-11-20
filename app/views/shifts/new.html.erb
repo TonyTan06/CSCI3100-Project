@@ -1,0 +1,14 @@
+
+<h1>Create Shift</h1>
+
+<p>
+  Activity: <%= @activity.title %>
+</p>
+
+<p>
+  Organization: <%= @activity.organization.name %>
+</p>
+
+<%= render "form", activity: @activity, shift: @shift %>
+
+<%= link_to "Back to Shifts", activity_shifts_path(@activity) %>

@@ -1,0 +1,74 @@
+
+<h1>Organization Dashboard</h1>
+<p>
+  Organization: <%= @organization.name %>
+</p>
+<p>
+  Email: <%= Current.user.email_address %>
+</p>
+
+<section id="organization-summary">
+  <h2>Organization Summary</h2>
+  <p>Activities: <%= @organization_summary[:activities] %></p>
+  <p>Shifts: <%= @organization_summary[:shifts] %></p>
+  <p>Confirmed Signups: <%= @organization_summary[:confirmed] %></p>
+  <p>Waitlisted Signups: <%= @organization_summary[:waitlisted] %></p>
+  <p>Cancelled Signups: <%= @organization_summary[:cancelled] %></p>
+</section>
+
+<%= link_to "New Activity", new_activity_path %>
+<%= link_to "View All Activities", activities_path %>
+
+<section id="my-activities">
+  <h2>My Activities</h2>
+  <% if @activities.any? %>
+    <% @activities.each do |activity| %>
+      <article id="activity-<%= activity.id %>">
+        <h3><%= activity.title %></h3>
+        <p>
+          Location: <%= activity.location %>
+        </p>
+        <%= link_to "View Activity", activity_path(activity) %>
+        <%= link_to "Edit Activity", edit_activity_path(activity) %>
+        <%= link_to "New Shift", new_activity_shift_path(activity) %>
+        <h4>Shifts</h4>
+        <% shifts = @shifts_by_activity[activity.id] %>
+        <% if shifts.any? %>
+          <% shifts.each do |shift| %>
+            <% summary = @shift_summaries[shift.id] %>
+            <section id="shift-<%= shift.id %>">
+              <h5>Shift #<%= shift.id %></h5>
+              <p>
+                Start Time:
+                <time datetime="<%= shift.start_time.iso8601 %>">
+                  <%= shift.start_time.strftime("%Y-%m-%d %H:%M") %>
+                </time>
+              </p>
+              <p>
+                End Time:
+                <time datetime="<%= shift.end_time.iso8601 %>">
+                  <%= shift.end_time.strftime("%Y-%m-%d %H:%M") %>
+                </time>
+              </p>
+              <p>Capacity: <%= summary[:capacity] %></p>
+              <p>Confirmed Signups: <%= summary[:confirmed] %></p>
+              <p>Available Slots: <%= summary[:available] %></p>
+              <p>Waitlisted Signups: <%= summary[:waitlisted] %></p>
+              <h6>Attendance Summary</h6>
+              <p>Present: <%= summary[:present] %></p>
+              <p>Absent: <%= summary[:absent] %></p>
+              <p>Pending: <%= summary[:pending] %></p>
+              <%= link_to "View Shift", activity_shift_path(activity, shift) %>
+              <%= link_to "Edit Shift", edit_activity_shift_path(activity, shift) %>
+              <%= link_to "Manage Attendance", activity_shift_attendances_path(activity, shift) %>
+            </section>
+          <% end %>
+        <% else %>
+          <p>No shifts yet.</p>
+        <% end %>
+      </article>
+    <% end %>
+  <% else %>
+    <p>No activities yet.</p>
+  <% end %>
+</section>

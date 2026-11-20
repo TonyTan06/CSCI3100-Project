@@ -1,0 +1,59 @@
+
+<h1>My Dashboard</h1>
+<p>
+  Email: <%= Current.user.email_address %>
+</p>
+
+<section id="signup-summary">
+  <h2>Signup Summary</h2>
+  <p>Confirmed: <%= @signup_summary[:confirmed] %></p>
+  <p>Waitlisted: <%= @signup_summary[:waitlisted] %></p>
+  <p>Cancelled: <%= @signup_summary[:cancelled] %></p>
+</section>
+
+<section id="my-signups">
+  <h2>My Signups</h2>
+  <% if @signups.any? %>
+    <% @signups.each do |signup| %>
+      <% shift = signup.shift %>
+      <% activity = shift.activity %>
+      <article id="signup-<%= signup.id %>">
+        <h3><%= activity.title %></h3>
+        <p>
+          Organization: <%= activity.organization.name %>
+        </p>
+        <p>
+          Location: <%= activity.location %>
+        </p>
+        <p>
+          Shift: #<%= shift.id %>
+        </p>
+        <p>
+          Start Time:
+          <time datetime="<%= shift.start_time.iso8601 %>">
+            <%= shift.start_time.strftime("%Y-%m-%d %H:%M") %>
+          </time>
+        </p>
+        <p>
+          End Time:
+          <time datetime="<%= shift.end_time.iso8601 %>">
+            <%= shift.end_time.strftime("%Y-%m-%d %H:%M") %>
+          </time>
+        </p>
+        <p>
+          Signup Status: <%= signup.status.humanize %>
+        </p>
+        <% if signup.status == "confirmed" %>
+          <p>
+            Attendance Status: <%= signup.attendance_status.humanize %>
+          </p>
+        <% end %>
+        <%= link_to "View Shift", activity_shift_path(activity, shift) %>
+      </article>
+    <% end %>
+  <% else %>
+    <p>You have no signups yet.</p>
+  <% end %>
+</section>
+
+<%= link_to "Browse Activities", activities_path %>

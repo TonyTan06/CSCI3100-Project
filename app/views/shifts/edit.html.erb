@@ -1,0 +1,22 @@
+
+<h1>Edit Shift</h1>
+
+<p>
+  Activity: <%= @activity.title %>
+</p>
+
+<p>
+  Organization: <%= @activity.organization.name %>
+</p>
+
+<p>
+  Confirmed Signups: <%= @shift.confirmed_count %>
+</p>
+
+<p>
+  Waitlisted Signups: <%= @shift.waitlist_queue.count %>
+</p>
+
+<%= render "form", activity: @activity, shift: @shift %>
+
+<%= link_to "Back to Shift", activity_shift_path(@activity, @shift) %>

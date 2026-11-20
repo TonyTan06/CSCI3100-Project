@@ -2,6 +2,15 @@ Rails.application.routes.draw do
   resource :session
   resource :registration, only: [:new, :create]
   resources :passwords, param: :token
+  # 活动、班次、报名及出勤管理路由
+  resources :activities, only: [:index, :show, :new, :create, :edit, :update] do
+    resources :shifts, only: [:index, :show, :new, :create, :edit, :update] do
+      resources :signups, only: [:create, :destroy]
+      resources :attendances, only: [:index, :update]
+    end
+  end
+  # Dashboard 路由
+  resource :dashboard, only: [:show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -15,5 +24,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   # 临时首页：后续实现 VolunteerHub Dashboard 后替换
-  root "registrations#new"
+  root "dashboards#show"
+  
 end

@@ -1,0 +1,11 @@
+
+<h1>Edit Activity</h1>
+
+<p>
+  Organization: <%= @activity.organization.name %>
+</p>
+
+<%= render "form", activity: @activity %>
+
+<%= link_to "Back to Activity", activity_path(@activity) %>
+

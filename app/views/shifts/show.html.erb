@@ -1,0 +1,87 @@
+
+<h1><%= @activity.title %> - Shift #<%= @shift.id %></h1>
+<p>
+  Organization: <%= @activity.organization.name %>
+</p>
+<p>
+  Location: <%= @activity.location %>
+</p>
+<p>
+  Start Time:
+  <time datetime="<%= @shift.start_time.iso8601 %>">
+    <%= @shift.start_time.strftime("%Y-%m-%d %H:%M") %>
+  </time>
+</p>
+<p>
+  End Time:
+  <time datetime="<%= @shift.end_time.iso8601 %>">
+    <%= @shift.end_time.strftime("%Y-%m-%d %H:%M") %>
+  </time>
+</p>
+<p>
+  Capacity: <%= @shift.capacity %>
+</p>
+<p>
+  Confirmed Signups: <%= @shift.confirmed_count %>
+</p>
+<p>
+  Available Slots: <%= @shift.available_slots %>
+</p>
+<p>
+  Waitlisted Signups: <%= @shift.waitlist_queue.count %>
+</p>
+
+<% if @shift.full? %>
+  <p>This shift is full.</p>
+<% else %>
+  <p>This shift has available slots.</p>
+<% end %>
+
+<% if @signup && @signup.errors.any? %>
+  <div>
+    <h2><%= @signup_error_title || "Unable to process signup" %></h2>
+    <ul>
+      <% @signup.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if Current.user.role == "volunteer" %>
+  <h2>My Signup</h2>
+  <p>
+    Signup Status: <%= @current_signup ? @current_signup.status.humanize : "Not registered" %>
+  </p>
+  <% if @current_signup && @current_signup.status == "confirmed" %>
+    <p>
+      Attendance Status: <%= @current_signup.attendance_status.humanize %>
+    </p>
+  <% end %>
+  <% if @current_signup && @current_signup.status == "waitlisted" && @waitlist_position %>
+    <p>
+      Waitlist Position: <%= @waitlist_position %> of <%= @waitlist_total %>
+    </p>
+    <p>
+      Your position indicates your current queue order.
+      Promotion depends on eligibility and available capacity.
+    </p>
+  <% end %>
+  <% if @current_signup && @current_signup.status != "cancelled" %>
+    <%= button_to "Cancel Signup", activity_shift_signup_path(@activity, @shift, @current_signup), method: :delete %>
+  <% else %>
+    <% if @shift.full? %>
+      <%= button_to "Join Waitlist", activity_shift_signups_path(@activity, @shift), method: :post %>
+    <% else %>
+      <%= button_to "Sign Up", activity_shift_signups_path(@activity, @shift), method: :post %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if Current.user.role == "organizer" %>
+  <%= link_to "Edit Shift", edit_activity_shift_path(@activity, @shift) %>
+  <%= link_to "Manage Attendance", activity_shift_attendances_path(@activity, @shift) %>
+<% end %>
+
+<%= link_to "Back to Shifts", activity_shifts_path(@activity, @shift.activity) %>
+<%= link_to "Back to Activity", activity_path(@activity) %>

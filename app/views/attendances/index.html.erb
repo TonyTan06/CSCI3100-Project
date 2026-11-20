@@ -1,0 +1,90 @@
+
+<h1>Attendance Management</h1>
+<p>
+  Activity: <%= @activity.title %>
+</p>
+<p>
+  Organization: <%= @activity.organization.name %>
+</p>
+<p>
+  Shift: #<%= @shift.id %>
+</p>
+<p>
+  Start Time:
+  <time datetime="<%= @shift.start_time.iso8601 %>">
+    <%= @shift.start_time.strftime("%Y-%m-%d %H:%M") %>
+  </time>
+</p>
+<p>
+  End Time:
+  <time datetime="<%= @shift.end_time.iso8601 %>">
+    <%= @shift.end_time.strftime("%Y-%m-%d %H:%M") %>
+  </time>
+</p>
+
+<% if @signup && @signup.errors.any? %>
+  <div>
+    <h2>Unable to update attendance</h2>
+    <ul>
+      <% @signup.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<section id="attendance-summary">
+  <h2>Attendance Summary</h2>
+  <p>Confirmed: <%= @attendance_summary[:confirmed] %></p>
+  <p>Present: <%= @attendance_summary[:present] %></p>
+  <p>Absent: <%= @attendance_summary[:absent] %></p>
+  <p>Pending: <%= @attendance_summary[:pending] %></p>
+</section>
+
+<h2>Confirmed Volunteers</h2>
+<% if @signups.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Volunteer</th>
+        <th>Attendance Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @signups.each do |signup| %>
+        <tr>
+          <td><%= signup.user.email_address %></td>
+          <td><%= signup.attendance_status.humanize %></td>
+          <td>
+            <%= form_with url: activity_shift_attendance_path(@activity, @shift, signup),
+                          scope: :attendance,
+                          method: :patch,
+                          local: true do |form| %>
+              <%= form.select :attendance_status,
+                              options_for_select(
+                                [
+                                  ["Pending", "pending"],
+                                  ["Present", "present"],
+                                  ["Absent", "absent"]
+                                ],
+                                signup.attendance_status
+                              ),
+                              {},
+                              {
+                                id: "attendance_status_#{signup.id}",
+                                aria: { label: "Attendance status for #{signup.user.email_address}" }
+                              } %>
+              <%= form.submit "Update Attendance" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No confirmed signups.</p>
+<% end %>
+
+<%= link_to "Back to Shift", activity_shift_path(@activity, @shift) %>
+<%= link_to "Back to Activity", activity_path(@activity) %>

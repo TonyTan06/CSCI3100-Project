@@ -1,0 +1,46 @@
+
+<h1>Shifts for <%= @activity.title %></h1>
+
+<% if @shifts.any? %>
+  <% @shifts.each do |shift| %>
+    <article>
+      <h2>
+        <%= link_to "Shift ##{shift.id}", activity_shift_path(@activity, shift) %>
+      </h2>
+
+      <p>
+        Start Time:
+        <time datetime="<%= shift.start_time.iso8601 %>">
+          <%= shift.start_time.strftime("%Y-%m-%d %H:%M") %>
+        </time>
+      </p>
+
+      <p>
+        End Time:
+        <time datetime="<%= shift.end_time.iso8601 %>">
+          <%= shift.end_time.strftime("%Y-%m-%d %H:%M") %>
+        </time>
+      </p>
+
+      <p>
+        Capacity: <%= shift.capacity %>
+      </p>
+
+      <p>
+        Confirmed Signups: <%= shift.confirmed_count %>
+      </p>
+
+      <p>
+        Available Slots: <%= shift.available_slots %>
+      </p>
+
+      <p>
+        Waitlisted Signups: <%= shift.waitlist_queue.count %>
+      </p>
+    </article>
+  <% end %>
+<% else %>
+  <p>No shifts available.</p>
+<% end %>
+
+<%= link_to "Back to Activity", activity_path(@activity) %>
