@@ -1,0 +1,243 @@
+
+/* ==================================================
+   身份认证卡片
+   ================================================== */
+
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  min-width: 0;
+  padding: var(--spacing-xl);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+/* ==================================================
+   身份认证标题
+   ================================================== */
+
+.auth-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.auth-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: var(--spacing-md);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--radius-lg);
+}
+
+.auth-logo svg {
+  width: 32px;
+  height: 32px;
+}
+
+.auth-header h1 {
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-2xl);
+}
+
+.auth-header p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* ==================================================
+   身份认证表单
+   ================================================== */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  width: 100%;
+  margin: 0;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--spacing-sm);
+}
+
+.auth-field label {
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+/* ==================================================
+   输入框及图标
+   ================================================== */
+
+.auth-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.auth-input-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
+
+.auth-input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  padding: 12px 14px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.auth-input-wrapper .auth-input {
+  padding-left: 44px;
+}
+
+.auth-input::placeholder {
+  color: #94A3B8;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(89, 44, 130, 0.12);
+}
+
+.auth-input-wrapper:focus-within .auth-input-icon {
+  color: var(--color-primary);
+}
+
+/* ==================================================
+   表单操作
+   ================================================== */
+
+.auth-options {
+  display: flex;
+  justify-content: flex-end;
+  font-size: var(--font-size-sm);
+  margin-top: calc(-1 * var(--spacing-sm));
+}
+
+.auth-submit {
+  width: 100%;
+  min-height: 48px;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+}
+
+/* ==================================================
+   身份认证底部链接
+   ================================================== */
+
+.auth-footer {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.auth-footer p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.auth-footer a {
+  font-weight: 600;
+}
+
+/* ==================================================
+   响应式布局
+   ================================================== */
+
+@media (max-width: 768px) {
+  .auth-card {
+    padding: var(--spacing-lg);
+  }
+
+  .auth-header {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .auth-header h1 {
+    font-size: var(--font-size-xl);
+  }
+
+  .auth-form {
+    gap: var(--spacing-md);
+  }
+
+  .auth-input {
+    font-size: var(--font-size-base);
+  }
+}
+
+
+/* ==================================================
+   身份认证说明信息
+   ================================================== */
+
+.auth-info {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: 12px;
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-md);
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+}
+
+.auth-info-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.auth-info p {
+  margin: 0;
+}
+
+/* ==================================================
+   身份认证表单验证错误
+   ================================================== */
+
+.auth-field .field_with_errors {
+  width: 100%;
+}
+
+.auth-field .field_with_errors .auth-input {
+  border-color: var(--color-danger);
+}
+
+.auth-field .field_with_errors .auth-input:focus {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.12);
+}

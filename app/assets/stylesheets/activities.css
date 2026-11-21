@@ -1,0 +1,288 @@
+
+/* ==================================================
+   活动列表网格布局
+   ================================================== */
+
+.activity-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  align-items: stretch;
+}
+
+/* ==================================================
+   活动卡片
+   ================================================== */
+
+.activity-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  min-width: 0;
+}
+
+.activity-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--radius-md);
+}
+
+.activity-card-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.activity-card-title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.activity-card-title a {
+  text-decoration: none;
+}
+
+.activity-card-title a:hover {
+  text-decoration: underline;
+}
+
+/* ==================================================
+   活动机构及地点信息
+   ================================================== */
+
+.activity-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.activity-card-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.activity-detail-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.activity-card-detail p {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ==================================================
+   活动描述
+   ================================================== */
+
+.activity-card-description {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* ==================================================
+   活动卡片底部操作区域
+   ================================================== */
+
+.activity-card-footer {
+  margin-top: auto;
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.activity-card-footer .btn {
+  width: 100%;
+}
+
+/* ==================================================
+   响应式布局
+   ================================================== */
+
+@media (max-width: 768px) {
+  .activity-grid {
+    grid-template-columns: 1fr;
+  }
+  .activity-card {
+    gap: var(--spacing-sm);
+  }
+}
+
+/* ==================================================
+   活动详情页面布局
+   ================================================== */
+
+.activity-detail-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.activity-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.activity-back-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+.activity-back-link:hover {
+  text-decoration: underline;
+}
+
+/* ==================================================
+   活动详情卡片标题
+   ================================================== */
+
+.activity-section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.activity-section-header .activity-card-icon {
+  flex-shrink: 0;
+}
+
+.activity-section-header h2 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+}
+
+/* ==================================================
+   活动机构及地点信息
+   ================================================== */
+
+.activity-information-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.activity-information-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  min-width: 0;
+}
+
+.activity-information-item > div {
+  min-width: 0;
+}
+
+.activity-information-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-text-secondary);
+}
+
+.activity-information-label {
+  margin: 0 0 var(--spacing-xs);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.activity-information-value {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+/* ==================================================
+   活动详细描述
+   ================================================== */
+
+.activity-description-section {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.activity-description-section h3 {
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-base);
+}
+
+.activity-full-description {
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* ==================================================
+   活动班次统计
+   ================================================== */
+
+.activity-section-description {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.activity-shift-total {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-md);
+}
+
+.activity-shift-total .stat-value {
+  margin: 0;
+  color: var(--color-primary);
+}
+
+/* ==================================================
+   活动管理区域
+   ================================================== */
+
+.activity-management h2 {
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-lg);
+}
+
+/* ==================================================
+   活动详情响应式布局
+   ================================================== */
+
+@media (max-width: 768px) {
+  .activity-detail-layout {
+    gap: var(--spacing-md);
+  }
+  .activity-information-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+  .activity-detail-layout .action-group .btn {
+    width: 100%;
+  }
+}

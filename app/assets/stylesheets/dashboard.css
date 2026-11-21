@@ -1,0 +1,391 @@
+
+/* ==================================================
+   Dashboard 报名记录卡片
+   ================================================== */
+
+.signup-card {
+  min-width: 0;
+}
+
+.signup-card .card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.signup-card .card-header h3 {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.signup-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.signup-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.signup-detail-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.signup-detail p {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ==================================================
+   报名状态及出勤状态
+   ================================================== */
+
+.signup-status {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.signup-card-footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.signup-card-footer .btn {
+  margin-left: auto;
+}
+
+/* ==================================================
+   Dashboard 操作按钮
+   ================================================== */
+
+.dashboard-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+/* ==================================================
+   响应式布局
+   ================================================== */
+
+@media (max-width: 768px) {
+  .signup-card .card-header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  .signup-card-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .signup-card-footer .btn {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* ==================================================
+   Organizer Dashboard 操作按钮
+   ================================================== */
+
+.organization-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ==================================================
+   Organizer Dashboard 活动卡片
+   ================================================== */
+
+.organization-activity-card {
+  min-width: 0;
+}
+
+.organization-activity-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.organization-activity-header h3 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  overflow-wrap: anywhere;
+}
+
+.activity-location {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.activity-location-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.activity-location p {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.organization-activity-shifts {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.organization-activity-shifts h4 {
+  margin-bottom: var(--spacing-md);
+}
+
+/* ==================================================
+   Organizer Dashboard 活动卡片响应式布局
+   ================================================== */
+
+@media (max-width: 768px) {
+  .organization-activity-header {
+    gap: var(--spacing-sm);
+  }
+  .organization-activity-header .action-group .btn {
+    flex: 1 1 auto;
+  }
+  .organization-activity-shifts {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+  }
+}
+
+/* ==================================================
+   Organizer Dashboard 班次卡片
+   ================================================== */
+
+.organization-shift-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.organization-shift-card {
+  min-width: 0;
+  padding: var(--spacing-md);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.organization-shift-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.organization-shift-header h5 {
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+}
+
+.organization-shift-times {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+/* ==================================================
+   班次容量及进度条
+   ================================================== */
+
+.shift-capacity {
+  padding: var(--spacing-md) 0;
+  margin-bottom: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.shift-capacity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.shift-capacity-header p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.shift-capacity-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.shift-capacity-item {
+  min-width: 0;
+  padding: var(--spacing-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.shift-capacity-item .stat-label {
+  overflow-wrap: anywhere;
+}
+
+.shift-capacity-value {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+}
+
+/* ==================================================
+   班次操作按钮
+   ================================================== */
+
+.organization-shift-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+/* ==================================================
+   班次卡片响应式布局
+   ================================================== */
+
+@media (max-width: 768px) {
+  .shift-capacity-item {
+    padding: var(--spacing-sm);
+  }
+  .organization-shift-actions .btn {
+    flex: 1 1 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .shift-capacity-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==================================================
+   班次出勤统计
+   ================================================== */
+
+.shift-attendance {
+  margin-bottom: var(--spacing-md);
+}
+
+.shift-attendance h6 {
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.shift-attendance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-sm);
+}
+
+.shift-attendance-item {
+  min-width: 0;
+  padding: var(--spacing-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.shift-attendance-item .stat-icon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.shift-attendance-item .stat-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.shift-attendance-value {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+}
+
+/* ==================================================
+   出勤统计响应式布局
+   ================================================== */
+
+@media (max-width: 768px) {
+  .shift-attendance-item {
+    padding: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .shift-attendance-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==================================================
+   Organizer Dashboard 紧凑版空状态
+   ================================================== */
+
+.empty-state-compact {
+  padding: var(--spacing-lg);
+  background-color: var(--color-background);
+  border-radius: var(--radius-md);
+}
+
+.empty-state-compact .empty-state-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.empty-state-compact .empty-state-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.empty-state-compact .empty-state-title {
+  font-size: var(--font-size-base);
+}
+
+.empty-state-compact .empty-state-description {
+  font-size: var(--font-size-sm);
+}

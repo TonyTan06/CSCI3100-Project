@@ -1,74 +1,296 @@
-
-<h1>Organization Dashboard</h1>
-<p>
-  Organization: <%= @organization.name %>
-</p>
-<p>
-  Email: <%= Current.user.email_address %>
-</p>
+<div class="page-header">
+  <div>
+    <h1>Organization Dashboard</h1>
+    <p class="page-subtitle">
+      Organization: <%= @organization.name %>
+    </p>
+    <p class="page-subtitle">
+      Email: <%= Current.user.email_address %>
+    </p>
+  </div>
+</div>
 
 <section id="organization-summary">
-  <h2>Organization Summary</h2>
-  <p>Activities: <%= @organization_summary[:activities] %></p>
-  <p>Shifts: <%= @organization_summary[:shifts] %></p>
-  <p>Confirmed Signups: <%= @organization_summary[:confirmed] %></p>
-  <p>Waitlisted Signups: <%= @organization_summary[:waitlisted] %></p>
-  <p>Cancelled Signups: <%= @organization_summary[:cancelled] %></p>
+  <div class="section-header">
+    <h2>Organization Summary</h2>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-icon stat-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="16" rx="2"/>
+          <path d="M16 3v4M8 3v4M3 10h18"/>
+        </svg>
+      </div>
+      <p class="stat-label">Activities:</p>
+      <p class="stat-value">
+        <%= @organization_summary[:activities] %>
+      </p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon stat-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 2"/>
+        </svg>
+      </div>
+      <p class="stat-label">Shifts:</p>
+      <p class="stat-value">
+        <%= @organization_summary[:shifts] %>
+      </p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon stat-success">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="m8 12 3 3 5-6"/>
+        </svg>
+      </div>
+      <p class="stat-label">Confirmed Signups:</p>
+      <p class="stat-value">
+        <%= @organization_summary[:confirmed] %>
+      </p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon stat-warning">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="9" cy="8" r="3"/>
+          <path d="M2 21v-2a7 7 0 0 1 14 0v2M17 5a3 3 0 0 1 0 6M22 21v-2a7 7 0 0 0-4-6"/>
+        </svg>
+      </div>
+      <p class="stat-label">Waitlisted Signups:</p>
+      <p class="stat-value">
+        <%= @organization_summary[:waitlisted] %>
+      </p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon stat-neutral">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="m9 9 6 6M15 9l-6 6"/>
+        </svg>
+      </div>
+      <p class="stat-label">Cancelled Signups:</p>
+      <p class="stat-value">
+        <%= @organization_summary[:cancelled] %>
+      </p>
+    </div>
+  </div>
 </section>
 
-<%= link_to "New Activity", new_activity_path %>
-<%= link_to "View All Activities", activities_path %>
+<div class="organization-actions">
+  <%= link_to new_activity_path, class: "btn btn-primary" do %>
+    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 5v14M5 12h14"/>
+    </svg>
+    <span>New Activity</span>
+  <% end %>
+  <%= link_to "View All Activities", activities_path, class: "btn btn-secondary" %>
+</div>
 
 <section id="my-activities">
-  <h2>My Activities</h2>
+  <div class="section-header">
+    <h2>My Activities</h2>
+  </div>
   <% if @activities.any? %>
-    <% @activities.each do |activity| %>
-      <article id="activity-<%= activity.id %>">
-        <h3><%= activity.title %></h3>
-        <p>
-          Location: <%= activity.location %>
-        </p>
-        <%= link_to "View Activity", activity_path(activity) %>
-        <%= link_to "Edit Activity", edit_activity_path(activity) %>
-        <%= link_to "New Shift", new_activity_shift_path(activity) %>
-        <h4>Shifts</h4>
-        <% shifts = @shifts_by_activity[activity.id] %>
-        <% if shifts.any? %>
-          <% shifts.each do |shift| %>
-            <% summary = @shift_summaries[shift.id] %>
-            <section id="shift-<%= shift.id %>">
-              <h5>Shift #<%= shift.id %></h5>
+    <div class="card-list">
+      <% @activities.each do |activity| %>
+        <article id="activity-<%= activity.id %>" class="card organization-activity-card">
+          <div class="organization-activity-header">
+            <h3><%= activity.title %></h3>
+            <div class="activity-location">
+              <svg class="activity-location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
               <p>
-                Start Time:
-                <time datetime="<%= shift.start_time.iso8601 %>">
-                  <%= shift.start_time.strftime("%Y-%m-%d %H:%M") %>
-                </time>
+                Location: <%= activity.location %>
               </p>
-              <p>
-                End Time:
-                <time datetime="<%= shift.end_time.iso8601 %>">
-                  <%= shift.end_time.strftime("%Y-%m-%d %H:%M") %>
-                </time>
-              </p>
-              <p>Capacity: <%= summary[:capacity] %></p>
-              <p>Confirmed Signups: <%= summary[:confirmed] %></p>
-              <p>Available Slots: <%= summary[:available] %></p>
-              <p>Waitlisted Signups: <%= summary[:waitlisted] %></p>
-              <h6>Attendance Summary</h6>
-              <p>Present: <%= summary[:present] %></p>
-              <p>Absent: <%= summary[:absent] %></p>
-              <p>Pending: <%= summary[:pending] %></p>
-              <%= link_to "View Shift", activity_shift_path(activity, shift) %>
-              <%= link_to "Edit Shift", edit_activity_shift_path(activity, shift) %>
-              <%= link_to "Manage Attendance", activity_shift_attendances_path(activity, shift) %>
-            </section>
-          <% end %>
-        <% else %>
-          <p>No shifts yet.</p>
-        <% end %>
-      </article>
-    <% end %>
+            </div>
+            <div class="action-group">
+              <%= link_to "View Activity", activity_path(activity), class: "btn btn-secondary btn-sm" %>
+              <%= link_to "Edit Activity", edit_activity_path(activity), class: "btn btn-secondary btn-sm" %>
+              <%= link_to new_activity_shift_path(activity), class: "btn btn-primary btn-sm" do %>
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 5v14M5 12h14"/>
+                </svg>
+                <span>New Shift</span>
+              <% end %>
+            </div>
+          </div>
+          <div class="organization-activity-shifts">
+            <h4>Shifts</h4>
+            <% shifts = @shifts_by_activity[activity.id] %>
+            <% if shifts.any? %>
+              <div class="organization-shift-list">
+                <% shifts.each do |shift| %>
+                  <% summary = @shift_summaries[shift.id] %>
+                  <% full = summary[:available] <= 0 %>
+                  <% utilization = summary[:capacity].positive? ? (summary[:confirmed].to_f / summary[:capacity] * 100).clamp(0, 100) : 0 %>
+                  <section id="shift-<%= shift.id %>" class="organization-shift-card">
+                    <div class="organization-shift-header">
+                      <h5>Shift #<%= shift.id %></h5>
+                      <span class="status-badge <%= full ? 'status-waitlisted' : 'status-confirmed' %>">
+                        <%= full ? "Full" : "Available" %>
+                      </span>
+                    </div>
+                    <div class="organization-shift-times">
+                      <div class="signup-detail">
+                        <svg class="signup-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <rect x="3" y="5" width="18" height="16" rx="2"/>
+                          <path d="M16 3v4M8 3v4M3 10h18"/>
+                        </svg>
+                        <p>
+                          Start Time:
+                          <time datetime="<%= shift.start_time.iso8601 %>">
+                            <%= shift.start_time.strftime("%Y-%m-%d %H:%M") %>
+                          </time>
+                        </p>
+                      </div>
+                      <div class="signup-detail">
+                        <svg class="signup-detail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <circle cx="12" cy="12" r="9"/>
+                          <path d="M12 7v5l3 2"/>
+                        </svg>
+                        <p>
+                          End Time:
+                          <time datetime="<%= shift.end_time.iso8601 %>">
+                            <%= shift.end_time.strftime("%Y-%m-%d %H:%M") %>
+                          </time>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="shift-capacity">
+                      <div class="shift-capacity-header">
+                        <p>Capacity: <%= summary[:capacity] %></p>
+                        <span class="text-muted text-sm">
+                          <%= summary[:confirmed] %> / <%= summary[:capacity] %>
+                        </span>
+                      </div>
+                      <div class="progress-bar"
+                           role="progressbar"
+                           aria-label="Shift capacity utilization"
+                           aria-valuemin="0"
+                           aria-valuemax="100"
+                           aria-valuenow="<%= utilization.round %>">
+                        <div class="progress-fill <%= 'progress-full' if full %>"
+                             style="width: <%= utilization %>%;">
+                        </div>
+                      </div>
+                      <div class="shift-capacity-grid">
+                        <div class="shift-capacity-item">
+                          <p class="stat-label">Confirmed Signups:</p>
+                          <p class="shift-capacity-value text-success">
+                            <%= summary[:confirmed] %>
+                          </p>
+                        </div>
+                        <div class="shift-capacity-item">
+                          <p class="stat-label">Available Slots:</p>
+                          <p class="shift-capacity-value text-primary">
+                            <%= summary[:available] %>
+                          </p>
+                        </div>
+                        <div class="shift-capacity-item">
+                          <p class="stat-label">Waitlisted Signups:</p>
+                          <p class="shift-capacity-value text-warning">
+                            <%= summary[:waitlisted] %>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="shift-attendance">
+                      <h6>Attendance Summary</h6>
+                      <div class="shift-attendance-grid">
+                        <div class="shift-attendance-item">
+                          <div class="stat-icon stat-success">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                              <circle cx="12" cy="12" r="9"/>
+                              <path d="m8 12 3 3 5-6"/>
+                            </svg>
+                          </div>
+                          <p class="stat-label">Present:</p>
+                          <p class="shift-attendance-value text-success">
+                            <%= summary[:present] %>
+                          </p>
+                        </div>
+                        <div class="shift-attendance-item">
+                          <div class="stat-icon stat-danger">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                              <circle cx="12" cy="12" r="9"/>
+                              <path d="m9 9 6 6M15 9l-6 6"/>
+                            </svg>
+                          </div>
+                          <p class="stat-label">Absent:</p>
+                          <p class="shift-attendance-value text-danger">
+                            <%= summary[:absent] %>
+                          </p>
+                        </div>
+                        <div class="shift-attendance-item">
+                          <div class="stat-icon stat-neutral">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                              <circle cx="12" cy="12" r="9"/>
+                              <path d="M12 7v5l3 2"/>
+                            </svg>
+                          </div>
+                          <p class="stat-label">Pending:</p>
+                          <p class="shift-attendance-value text-muted">
+                            <%= summary[:pending] %>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="organization-shift-actions">
+                      <%= link_to "View Shift", activity_shift_path(activity, shift), class: "btn btn-secondary btn-sm" %>
+                      <%= link_to "Edit Shift", edit_activity_shift_path(activity, shift), class: "btn btn-secondary btn-sm" %>
+                      <%= link_to "Manage Attendance", activity_shift_attendances_path(activity, shift), class: "btn btn-primary btn-sm" %>
+                    </div>
+                  </section>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="empty-state empty-state-compact">
+                <div class="empty-state-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M12 7v5l3 2"/>
+                  </svg>
+                </div>
+                <h5 class="empty-state-title">No shifts yet.</h5>
+                <p class="empty-state-description">
+                  Create a shift so volunteers can sign up for this activity.
+                </p>
+                <%= link_to new_activity_shift_path(activity), class: "btn btn-primary btn-sm" do %>
+                  <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 5v14M5 12h14"/>
+                  </svg>
+                  <span>New Shift</span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </article>
+      <% end %>
+    </div>
   <% else %>
-    <p>No activities yet.</p>
+    <div class="empty-state">
+      <div class="empty-state-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="16" rx="2"/>
+          <path d="M16 3v4M8 3v4M3 10h18"/>
+        </svg>
+      </div>
+      <h3 class="empty-state-title">No activities yet.</h3>
+      <p class="empty-state-description">
+        Create your first volunteer activity to start managing shifts and volunteers.
+      </p>
+      <%= link_to new_activity_path, class: "btn btn-primary" do %>
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+        <span>New Activity</span>
+      <% end %>
+    </div>
   <% end %>
 </section>

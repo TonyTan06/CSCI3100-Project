@@ -1,7 +1,16 @@
+
 Rails.application.routes.draw do
   resource :session
   resource :registration, only: [:new, :create]
   resources :passwords, param: :token
+
+  # 本地开发专用：快速切换测试账号
+  if Rails.env.development?
+    post "dev/switch_account",
+         to: "dev_tools/account_switches#create",
+         as: :dev_switch_account
+  end
+
   # 活动、班次、报名及出勤管理路由
   resources :activities, only: [:index, :show, :new, :create, :edit, :update] do
     resources :shifts, only: [:index, :show, :new, :create, :edit, :update] do
@@ -25,5 +34,4 @@ Rails.application.routes.draw do
   # root "posts#index"
   # 临时首页：后续实现 VolunteerHub Dashboard 后替换
   root "dashboards#show"
-  
 end

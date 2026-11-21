@@ -1,28 +1,107 @@
 
-<h1><%= @activity.title %></h1>
+<div class="page-header">
+  <div>
+    <%= link_to activities_path, class: "activity-back-link" do %>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5m7-7-7 7 7 7"/>
+      </svg>
+      <span>Back to Activities</span>
+    <% end %>
+    <h1><%= @activity.title %></h1>
+    <p class="page-subtitle">Volunteer Activity Details</p>
+  </div>
+</div>
 
-<p>
-  Organization: <%= @activity.organization.name %>
-</p>
+<div class="activity-detail-layout">
+  <section class="card activity-information">
+    <div class="activity-section-header">
+      <div class="activity-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="16" rx="2"/>
+          <path d="M16 3v4M8 3v4M3 10h18"/>
+        </svg>
+      </div>
+      <h2>Activity Information</h2>
+    </div>
+    <div class="activity-information-grid">
+      <div class="activity-information-item">
+        <svg class="activity-information-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="4" y="3" width="16" height="18" rx="2"/>
+          <path d="M9 21v-4h6v4M8 7h2M14 7h2M8 11h2M14 11h2"/>
+        </svg>
+        <div>
+          <p class="activity-information-label">Organization:</p>
+          <p class="activity-information-value">
+            <%= @activity.organization.name %>
+          </p>
+        </div>
+      </div>
+      <div class="activity-information-item">
+        <svg class="activity-information-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        <div>
+          <p class="activity-information-label">Location:</p>
+          <p class="activity-information-value">
+            <%= @activity.location %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="activity-description-section">
+      <h3>Description</h3>
+      <p class="activity-full-description"><%= @activity.description %></p>
+    </div>
+  </section>
 
-<p>
-  Location: <%= @activity.location %>
-</p>
+  <section class="card activity-shifts-section">
+    <div class="activity-section-header">
+      <div class="activity-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 2"/>
+        </svg>
+      </div>
+      <h2>Shifts</h2>
+    </div>
+    <p class="activity-section-description">
+      Explore the volunteer shifts for this activity.
+    </p>
+    <div class="activity-shift-total">
+      <p class="stat-label">Total Shifts:</p>
+      <p class="stat-value">
+        <%= @activity.shifts.count %>
+      </p>
+    </div>
+    <div class="action-group">
+      <%= link_to activity_shifts_path(@activity), class: "btn btn-primary" do %>
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="16" rx="2"/>
+          <path d="M16 3v4M8 3v4M3 10h18"/>
+        </svg>
+        <span>View Shifts</span>
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14m-7-7 7 7-7 7"/>
+        </svg>
+      <% end %>
+    </div>
+  </section>
 
-<p>
-  <%= @activity.description %>
-</p>
-
-<h2>Shifts</h2>
-
-<p>
-  Total Shifts: <%= @activity.shifts.count %>
-</p>
-
-<%= link_to "View Shifts", activity_shifts_path(@activity) %>
-
-<% if Current.user.role == "organizer" %>
-  <%= link_to "Edit Activity", edit_activity_path(@activity) %>
-<% end %>
-
-<%= link_to "Back to Activities", activities_path %>
+  <% if Current.user.role == "organizer" %>
+    <section class="card activity-management">
+      <h2>Activity Management</h2>
+      <p class="activity-section-description">
+        Manage the information for this volunteer activity.
+      </p>
+      <div class="action-group">
+        <%= link_to edit_activity_path(@activity), class: "btn btn-secondary" do %>
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m16 3 5 5L8 21H3v-5L16 3ZM13 6l5 5"/>
+          </svg>
+          <span>Edit Activity</span>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+</div>

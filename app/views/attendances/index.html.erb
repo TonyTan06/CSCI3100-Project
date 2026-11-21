@@ -23,7 +23,7 @@
 </p>
 
 <% if @signup && @signup.errors.any? %>
-  <div>
+  <div class="validation-errors" role="alert">
     <h2>Unable to update attendance</h2>
     <ul>
       <% @signup.errors.full_messages.each do |message| %>

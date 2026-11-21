@@ -22,9 +22,59 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
+
   
+
   <body>
-    <%= render "layouts/navigation" %>
-    <%= yield %>
+    <div class="site-shell">
+      <header class="app-header">
+        <div class="app-brand">
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/>
+          </svg>
+          <span>VolunteerHub</span>
+        </div>
+        <% if authenticated? %>
+          <div class="header-user">
+            <span class="header-role">
+              <%= Current.user.role.humanize %>
+            </span>
+            <span class="header-avatar">
+              <%= Current.user.email_address.first.upcase %>
+            </span>
+          </div>
+        <% else %>
+          <%= render "layouts/navigation" %>
+        <% end %>
+      </header>
+      <% if authenticated? %>
+        <div class="app-layout">
+          <aside class="app-sidebar">
+            <%= render "layouts/navigation" %>
+          </aside>
+          <div class="app-content">
+            <main class="app-main" id="main-content">
+              <%= render "layouts/flash" %>
+              <%= yield %>
+            </main>
+            <footer class="app-footer">
+              VolunteerHub · CSCI3100 Course Project
+            </footer>
+          </div>
+        </div>
+      <% else %>
+        <div class="guest-layout">
+          <main class="guest-main" id="main-content">
+            <%= render "layouts/flash" %>
+            <%= yield %>
+          </main>
+          <footer class="app-footer">
+            VolunteerHub · CSCI3100 Course Project
+          </footer>
+        </div>
+      <% end %>
+    </div>
   </body>
+
+
 </html>

@@ -1,0 +1,459 @@
+
+/* ==================================================
+   Shift 列表布局
+   ================================================== */
+
+.shift-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.shift-list-card {
+  min-width: 0;
+}
+
+.shift-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.shift-list-header h2 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+}
+
+.shift-list-header h2 a {
+  text-decoration: none;
+}
+
+.shift-list-header h2 a:hover {
+  text-decoration: underline;
+}
+
+/* ==================================================
+   Shift 时间信息
+   ================================================== */
+
+.shift-list-times {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.shift-list-time {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.shift-list-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.shift-list-time p {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ==================================================
+   Shift 容量及统计
+   ================================================== */
+
+.shift-list-capacity {
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.shift-list-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.shift-list-stat {
+  min-width: 0;
+  padding: var(--spacing-md);
+  background-color: var(--color-background);
+  border-radius: var(--radius-md);
+}
+
+.shift-list-stat .stat-label {
+  overflow-wrap: anywhere;
+}
+
+.shift-list-stat-value {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+}
+
+/* ==================================================
+   Shift 页面操作按钮
+   ================================================== */
+
+.shift-list-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.shift-page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+/* ==================================================
+   响应式布局
+   ================================================== */
+
+@media (max-width: 768px) {
+  .shift-list {
+    gap: var(--spacing-md);
+  }
+  .shift-list-stat {
+    padding: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .shift-list-stats {
+    grid-template-columns: 1fr;
+  }
+  .shift-list-footer .btn {
+    width: 100%;
+  }
+}
+
+/* ==================================================
+   Shift 详情页面
+   ================================================== */
+
+.shift-detail-card {
+  min-width: 0;
+}
+
+.shift-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.shift-detail-header h2 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+}
+
+/* ==================================================
+   Shift 基本信息
+   ================================================== */
+
+.shift-detail-info {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-md);
+  padding-bottom: var(--spacing-lg);
+}
+
+.shift-detail-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  min-width: 0;
+  color: var(--color-text-secondary);
+}
+
+.shift-detail-info-row p {
+  margin: 0;
+  min-width: 0;
+  font-size: var(--font-size-sm);
+  overflow-wrap: anywhere;
+}
+
+/* ==================================================
+   Shift 容量统计
+   ================================================== */
+
+.shift-detail-capacity {
+  padding: var(--spacing-lg) 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.shift-detail-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.shift-detail-stat {
+  min-width: 0;
+  padding: var(--spacing-md);
+  background-color: var(--color-background);
+  border-radius: var(--radius-md);
+}
+
+.shift-detail-stat p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  overflow-wrap: anywhere;
+}
+
+.shift-detail-stat strong {
+  display: block;
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+}
+
+.shift-detail-availability {
+  margin: var(--spacing-lg) 0 0;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+/* ==================================================
+   响应式布局
+   ================================================== */
+
+@media (max-width: 768px) {
+  .shift-detail-info {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .shift-detail-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==================================================
+   Volunteer 报名卡片
+   ================================================== */
+
+.shift-signup-card {
+  margin-top: var(--spacing-lg);
+  min-width: 0;
+}
+
+.shift-signup-header {
+  margin-bottom: var(--spacing-lg);
+}
+
+.shift-signup-header h2 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+}
+
+.shift-signup-information {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.shift-signup-information p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.shift-signup-status {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+}
+
+.status-unregistered {
+  background-color: #F1F5F9;
+  color: #475569;
+}
+
+/* ==================================================
+   报名操作按钮
+   ================================================== */
+
+.shift-signup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.shift-signup-actions form {
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .shift-signup-actions,
+  .shift-signup-actions form,
+  .shift-signup-actions .btn {
+    width: 100%;
+  }
+}
+
+/* ==================================================
+   Volunteer Waitlist 等候名单信息
+   ================================================== */
+
+.shift-waitlist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background-color: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-radius: var(--radius-md);
+}
+
+.shift-waitlist-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.shift-waitlist-heading h3 {
+  margin: 0;
+  color: #92400E;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+}
+
+.shift-waitlist-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: #92400E;
+}
+
+.shift-waitlist-position {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+}
+
+.shift-waitlist-position strong {
+  color: #92400E;
+  font-size: var(--font-size-lg);
+}
+
+.shift-waitlist-description {
+  color: #92400E;
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+/* ==================================================
+   Organizer Shift 管理区域
+   ================================================== */
+
+.shift-management-card {
+  margin-top: var(--spacing-lg);
+}
+
+.shift-management-card h2 {
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-lg);
+}
+
+.shift-management-card .action-group {
+  margin-top: var(--spacing-md);
+}
+
+/* ==================================================
+   Shift 管理及返回按钮响应式布局
+   ================================================== */
+
+@media (max-width: 480px) {
+  .shift-management-card .action-group,
+  .shift-page-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .shift-management-card .action-group .btn,
+  .shift-page-actions .btn {
+    width: 100%;
+  }
+}
+
+/* ==================================================
+   Shift 空状态
+   ================================================== */
+
+.shift-empty-state {
+  min-height: 240px;
+}
+
+.shift-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--spacing-md);
+  background-color: var(--color-primary-light);
+  border-radius: 50%;
+  color: var(--color-primary);
+}
+
+.shift-empty-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* ==================================================
+   Shift 报名错误提示
+   ================================================== */
+
+.shift-signup-error {
+  margin-top: var(--spacing-lg);
+}
+
+.shift-error-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.shift-error-heading svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: #B91C1C;
+}
+
+.shift-error-heading h2 {
+  margin: 0;
+  font-size: var(--font-size-base);
+}
+
+.shift-signup-error ul {
+  margin-top: var(--spacing-md);
+}
