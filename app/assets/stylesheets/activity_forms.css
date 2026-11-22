@@ -5,6 +5,11 @@
 
 .activity-create-header {
   align-items: center;
+  min-width: 0;
+}
+
+.activity-create-header > div {
+  min-width: 0;
 }
 
 .activity-form-kicker {
@@ -20,28 +25,38 @@
   grid-template-columns: minmax(0, 1fr) 300px;
   align-items: start;
   gap: var(--spacing-lg);
+  min-width: 0;
 }
 
 .activity-form-card,
 .activity-form-aside {
+  box-sizing: border-box;
   min-width: 0;
+  max-width: 100%;
 }
 
 .activity-form-intro {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
+  min-width: 0;
   margin-bottom: var(--spacing-lg);
+}
+
+.activity-form-intro > div:last-child {
+  min-width: 0;
 }
 
 .activity-form-intro h2,
 .activity-form-aside h2 {
   margin: 0 0 var(--spacing-xs);
   font-size: var(--font-size-lg);
+  overflow-wrap: anywhere;
 }
 
 .activity-form-intro p {
   margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .activity-form-icon,
@@ -72,16 +87,20 @@
   align-items: center;
   flex-wrap: wrap;
   gap: var(--spacing-sm);
+  min-width: 0;
   margin-bottom: var(--spacing-lg);
   padding: var(--spacing-md);
   background-color: var(--color-primary-light);
   border-radius: var(--radius-md);
   color: var(--color-primary-dark);
   font-size: var(--font-size-sm);
+  overflow-wrap: anywhere;
 }
 
 .activity-form-organization strong {
+  min-width: 0;
   font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
 /* ==================================================
@@ -92,12 +111,14 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
+  min-width: 0;
 }
 
 .activity-form-field {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+  min-width: 0;
 }
 
 .activity-form-label {
@@ -110,6 +131,7 @@
   box-sizing: border-box;
   display: block;
   width: 100%;
+  max-width: 100%;
   min-width: 0;
   padding: 12px 14px;
   background-color: var(--color-surface);
@@ -146,18 +168,28 @@
   color: var(--color-text-secondary);
   font-size: 12px;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .activity-form-actions {
   display: flex;
   justify-content: flex-end;
+  gap: var(--spacing-sm);
+  min-width: 0;
   margin-top: var(--spacing-sm);
   padding-top: var(--spacing-lg);
   border-top: 1px solid var(--color-border);
 }
 
+.activity-form-submit {
+  max-width: 100%;
+  cursor: pointer;
+}
+
 .activity-form-errors {
+  min-width: 0;
   margin-bottom: var(--spacing-lg);
+  overflow-wrap: anywhere;
 }
 
 /* ==================================================
@@ -181,12 +213,18 @@
   color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .activity-guide-item {
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-sm);
+  min-width: 0;
+}
+
+.activity-guide-item > span:last-child {
+  min-width: 0;
 }
 
 .activity-guide-dot {
@@ -199,6 +237,7 @@
 }
 
 .activity-guide-note {
+  min-width: 0;
   margin-top: var(--spacing-sm);
   padding: var(--spacing-md);
   background-color: var(--color-primary-light);
@@ -214,19 +253,118 @@
   .activity-form-layout {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  .activity-form-aside {
+    width: 100%;
+  }
 }
 
-@media (max-width: 480px) {
-  .activity-create-header {
-    align-items: stretch;
+/* ==================================================
+   平板端 Activity 表单布局
+   ================================================== */
+
+@media (max-width: 768px) {
+  .activity-form-layout {
+    gap: var(--spacing-md);
   }
 
   .activity-form-intro {
     align-items: flex-start;
   }
 
-  .activity-form-actions,
+  .activity-create-header {
+    gap: var(--spacing-md);
+  }
+
+  .activity-form-fields {
+    gap: var(--spacing-md);
+  }
+}
+
+/* ==================================================
+   手机端 Activity 表单布局
+   ================================================== */
+
+@media (max-width: 480px) {
+  .activity-create-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .activity-create-header > .btn {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+
+  .activity-form-card,
+  .activity-form-aside {
+    padding: var(--spacing-md);
+  }
+
+  .activity-form-intro {
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .activity-form-icon,
+  .activity-guide-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .activity-form-icon svg,
+  .activity-guide-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .activity-form-organization {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .activity-form-input {
+    min-height: 44px;
+    padding: 11px 12px;
+    font-size: 16px;
+  }
+
+  .activity-form-textarea {
+    min-height: 140px;
+  }
+
+  .activity-form-actions {
+    width: 100%;
+    padding-top: var(--spacing-md);
+  }
+
   .activity-form-submit {
     width: 100%;
+    box-sizing: border-box;
+  }
+
+  .activity-guide-note {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
+
+/* ==================================================
+   超小屏幕 Activity 表单适配
+   ================================================== */
+
+@media (max-width: 360px) {
+  .activity-form-intro h2,
+  .activity-form-aside h2 {
+    font-size: var(--font-size-base);
+  }
+
+  .activity-form-organization {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .activity-form-input {
+    padding: 10px;
   }
 }

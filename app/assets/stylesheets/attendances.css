@@ -1,0 +1,662 @@
+
+/* ==================================================
+   Attendance Management 页面标题
+   ================================================== */
+
+.attendance-page-header {
+  align-items: center;
+  min-width: 0;
+}
+
+.attendance-page-header > div {
+  min-width: 0;
+}
+
+.attendance-page-kicker {
+  margin: 0 0 var(--spacing-sm);
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* ==================================================
+   班次基本信息卡片
+   ================================================== */
+
+.attendance-shift-card {
+  min-width: 0;
+  margin-bottom: var(--spacing-xl);
+}
+
+.attendance-section-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  min-width: 0;
+  margin-bottom: var(--spacing-lg);
+}
+
+.attendance-section-heading > div:last-child {
+  min-width: 0;
+}
+
+.attendance-heading-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-lg);
+  color: var(--color-primary);
+}
+
+.attendance-heading-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.attendance-section-heading h2,
+.attendance-volunteers-header h2 {
+  margin: 0 0 var(--spacing-xs);
+  font-size: var(--font-size-lg);
+  overflow-wrap: anywhere;
+}
+
+.attendance-section-heading p,
+.attendance-volunteers-header p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  overflow-wrap: anywhere;
+}
+
+.attendance-shift-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-md);
+  min-width: 0;
+  padding: var(--spacing-lg);
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-md);
+}
+
+.attendance-shift-item {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  min-width: 0;
+  font-size: var(--font-size-sm);
+}
+
+.attendance-info-label {
+  color: var(--color-text-secondary);
+}
+
+.attendance-shift-item strong,
+.attendance-shift-item time {
+  color: var(--color-text);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* ==================================================
+   出勤统计区域
+   ================================================== */
+
+.attendance-summary-section {
+  min-width: 0;
+  margin-bottom: var(--spacing-xl);
+}
+
+.attendance-section-title {
+  min-width: 0;
+  margin-bottom: var(--spacing-md);
+}
+
+.attendance-section-title h2 {
+  margin: 0 0 var(--spacing-xs);
+  font-size: var(--font-size-lg);
+}
+
+.attendance-section-title p {
+  margin: 0;
+}
+
+.attendance-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-md);
+  min-width: 0;
+}
+
+.attendance-stat-card {
+  min-width: 0;
+  padding: var(--spacing-lg);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm, 0 2px 6px rgba(15, 23, 42, 0.05));
+}
+
+.attendance-stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.attendance-stat-label {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.attendance-stat-symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+}
+
+.attendance-stat-symbol svg {
+  width: 21px;
+  height: 21px;
+}
+
+.attendance-stat-value {
+  margin: var(--spacing-md) 0 0;
+  font-size: var(--font-size-2xl, 28px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.attendance-stat-confirmed .attendance-stat-symbol {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.attendance-stat-confirmed .attendance-stat-value {
+  color: var(--color-primary);
+}
+
+.attendance-stat-present .attendance-stat-symbol {
+  background-color: #DCFCE7;
+  color: #15803D;
+}
+
+.attendance-stat-present .attendance-stat-value {
+  color: #15803D;
+}
+
+.attendance-stat-absent .attendance-stat-symbol {
+  background-color: #FEE2E2;
+  color: #B91C1C;
+}
+
+.attendance-stat-absent .attendance-stat-value {
+  color: #B91C1C;
+}
+
+.attendance-stat-pending .attendance-stat-symbol {
+  background-color: #F1F5F9;
+  color: #475569;
+}
+
+.attendance-stat-pending .attendance-stat-value {
+  color: #475569;
+}
+
+/* ==================================================
+   已确认志愿者表格
+   ================================================== */
+
+.attendance-volunteers-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.attendance-volunteers-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  min-width: 0;
+  margin-bottom: var(--spacing-lg);
+}
+
+.attendance-volunteers-header > div {
+  min-width: 0;
+}
+
+.attendance-volunteer-count {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  background-color: var(--color-primary-light);
+  border-radius: 999px;
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.attendance-table-wrapper {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.attendance-table {
+  width: 100%;
+  min-width: 660px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.attendance-table th {
+  padding: 14px 16px;
+  background-color: #F8FAFC;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.attendance-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+  font-size: var(--font-size-sm);
+}
+
+.attendance-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.attendance-table tbody tr:hover {
+  background-color: #FAF8FC;
+}
+
+.attendance-volunteer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  min-width: 0;
+}
+
+.attendance-volunteer-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  background-color: var(--color-primary-light);
+  border-radius: 50%;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.attendance-volunteer-email {
+  min-width: 0;
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+}
+
+/* ==================================================
+   修改出勤状态的表单
+   ================================================== */
+
+.attendance-update-form {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  min-width: 0;
+  margin: 0;
+}
+
+/* 自定义下拉箭头，增加与右侧边框的距离 */
+.attendance-status-select {
+  box-sizing: border-box;
+  min-width: 120px;
+  min-height: 38px;
+  padding: 8px 40px 8px 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--color-surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.attendance-status-select:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.attendance-update-form .btn {
+  white-space: nowrap;
+}
+
+/* ==================================================
+   错误信息及空状态
+   ================================================== */
+
+.attendance-validation-errors {
+  min-width: 0;
+  margin-bottom: var(--spacing-xl);
+  overflow-wrap: anywhere;
+}
+
+.attendance-error-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.attendance-error-heading svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: #B91C1C;
+}
+
+.attendance-error-heading h2 {
+  margin: 0;
+  font-size: var(--font-size-base);
+}
+
+.attendance-empty-state {
+  min-height: 220px;
+}
+
+.attendance-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--spacing-md);
+  background-color: var(--color-primary-light);
+  border-radius: 50%;
+  color: var(--color-primary);
+}
+
+.attendance-empty-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* ==================================================
+   底部返回导航
+   ================================================== */
+
+.attendance-page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+/* ==================================================
+   响应式布局
+   ================================================== */
+
+@media (max-width: 1100px) {
+  .attendance-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .attendance-shift-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .attendance-page-header {
+    align-items: stretch;
+  }
+
+  .attendance-stat-grid {
+    gap: var(--spacing-sm);
+  }
+
+  .attendance-stat-card {
+    padding: var(--spacing-md);
+  }
+
+  .attendance-page-actions {
+    flex-direction: column;
+  }
+
+  .attendance-page-actions .btn {
+    width: 100%;
+  }
+}
+
+/* ==================================================
+   平板端 Attendance 页面适配
+   ================================================== */
+
+@media (max-width: 900px) {
+  .attendance-shift-grid {
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+  }
+
+  .attendance-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .attendance-volunteer-count {
+    white-space: nowrap;
+  }
+}
+
+/* ==================================================
+   手机端 Attendance 统计卡片
+   ================================================== */
+
+@media (max-width: 650px) {
+  .attendance-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .attendance-stat-card {
+    padding: var(--spacing-md);
+  }
+
+  .attendance-stat-top {
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+  }
+
+  .attendance-stat-symbol {
+    width: 32px;
+    height: 32px;
+  }
+
+  .attendance-stat-symbol svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .attendance-stat-value {
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-xl);
+  }
+
+  .attendance-section-heading {
+    align-items: flex-start;
+  }
+}
+
+/* ==================================================
+   手机端表格转换为志愿者卡片
+   ================================================== */
+
+@media (max-width: 650px) {
+  .attendance-table-wrapper {
+    overflow-x: visible;
+  }
+
+  .attendance-table {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .attendance-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .attendance-table tbody {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .attendance-table tbody tr {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: var(--spacing-md);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+
+  .attendance-table td {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    width: 100%;
+    min-width: 0;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .attendance-table tbody tr:last-child td {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .attendance-table tbody tr td:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .attendance-table td::before {
+    color: var(--color-text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .attendance-table td:nth-child(1)::before {
+    content: "Volunteer";
+  }
+
+  .attendance-table td:nth-child(2)::before {
+    content: "Attendance Status";
+  }
+
+  .attendance-table td:nth-child(3)::before {
+    content: "Action";
+    display: block;
+    width: 100%;
+  }
+
+  .attendance-volunteer {
+    max-width: 100%;
+  }
+
+  .attendance-table td:last-child {
+    display: block;
+  }
+
+  .attendance-update-form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+    width: 100%;
+  }
+
+  .attendance-status-select {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .attendance-update-form .btn {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  .attendance-volunteers-header {
+    align-items: flex-start;
+  }
+}
+
+/* ==================================================
+   超小屏幕 Attendance 布局
+   ================================================== */
+
+@media (max-width: 360px) {
+  .attendance-stat-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .attendance-shift-grid {
+    padding: var(--spacing-sm);
+  }
+
+  .attendance-volunteers-card {
+    padding: var(--spacing-md);
+  }
+
+  .attendance-table tbody tr {
+    padding: var(--spacing-sm);
+  }
+
+  .attendance-table td {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .attendance-stat-label {
+    font-size: 12px;
+  }
+}

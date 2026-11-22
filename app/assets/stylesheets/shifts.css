@@ -1,4 +1,3 @@
-
 /* ==================================================
    Shift 列表布局
    ================================================== */
@@ -456,4 +455,93 @@
 
 .shift-signup-error ul {
   margin-top: var(--spacing-md);
+}
+
+/* ==================================================
+   Part 9.10.3 Shift 卡片及长文字防溢出
+   ================================================== */
+
+.shift-list,
+.shift-list-card,
+.shift-detail-card,
+.shift-signup-card,
+.shift-management-card,
+.shift-list-times,
+.shift-detail-info,
+.shift-list-stats,
+.shift-detail-stats,
+.shift-signup-information {
+  min-width: 0;
+}
+
+.shift-list-header h2,
+.shift-detail-header h2,
+.shift-waitlist,
+.shift-waitlist-heading h3 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.shift-list-stat,
+.shift-detail-stat,
+.shift-waitlist {
+  box-sizing: border-box;
+}
+
+.shift-waitlist {
+  max-width: 100%;
+}
+
+.shift-capacity-header {
+  flex-wrap: wrap;
+}
+
+.shift-signup-actions form,
+.shift-signup-actions .btn,
+.shift-management-card .action-group,
+.shift-page-actions {
+  max-width: 100%;
+}
+
+/* ==================================================
+   平板及手机 Shift 容量统计自动适配
+   ================================================== */
+
+@media (min-width: 361px) and (max-width: 600px) {
+  .shift-list-stats,
+  .shift-detail-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shift-list-stat:last-child,
+  .shift-detail-stat:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ==================================================
+   手机端 Shift 操作按钮及状态布局
+   ================================================== */
+
+@media (max-width: 480px) {
+  .shift-list-header,
+  .shift-detail-header {
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .shift-list-footer .btn,
+  .shift-page-actions .btn,
+  .shift-signup-actions form,
+  .shift-signup-actions .btn,
+  .shift-management-card .action-group .btn {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+  }
+
+  .shift-waitlist {
+    padding: var(--spacing-md);
+  }
 }
