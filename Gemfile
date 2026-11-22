@@ -72,4 +72,7 @@ group :test do
 
   # Clean database records between Cucumber scenarios
   gem "database_cleaner"
+
+  # Measure test coverage for RSpec and Cucumber
+  gem "simplecov", require: false
 end
