@@ -1,3 +1,4 @@
+
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
@@ -65,4 +66,10 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+
+  # Use Cucumber for BDD acceptance testing
+  gem "cucumber-rails", "~> 4.1", require: false
+
+  # Clean database records between Cucumber scenarios
+  gem "database_cleaner"
 end

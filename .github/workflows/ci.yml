@@ -87,7 +87,7 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Run RSpec tests
+      - name: Run RSpec and Cucumber tests
         env:
           RAILS_ENV: test
           # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
@@ -95,3 +95,4 @@ jobs:
         run: |
           bin/rails db:test:prepare
           bundle exec rspec
+          bundle exec cucumber --publish-quiet
