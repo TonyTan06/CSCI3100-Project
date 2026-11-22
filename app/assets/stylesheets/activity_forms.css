@@ -1,0 +1,232 @@
+
+/* ==================================================
+   Activity 创建与编辑页面布局
+   ================================================== */
+
+.activity-create-header {
+  align-items: center;
+}
+
+.activity-form-kicker {
+  margin: 0 0 var(--spacing-sm);
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.activity-form-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: start;
+  gap: var(--spacing-lg);
+}
+
+.activity-form-card,
+.activity-form-aside {
+  min-width: 0;
+}
+
+.activity-form-intro {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.activity-form-intro h2,
+.activity-form-aside h2 {
+  margin: 0 0 var(--spacing-xs);
+  font-size: var(--font-size-lg);
+}
+
+.activity-form-intro p {
+  margin: 0;
+}
+
+.activity-form-icon,
+.activity-guide-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-lg);
+  color: var(--color-primary);
+}
+
+.activity-form-icon svg,
+.activity-guide-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ==================================================
+   Activity 所属机构
+   ================================================== */
+
+.activity-form-organization {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-md);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-sm);
+}
+
+.activity-form-organization strong {
+  font-weight: 600;
+}
+
+/* ==================================================
+   Activity 表单字段
+   ================================================== */
+
+.activity-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.activity-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.activity-form-label {
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.activity-form-input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 12px 14px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.activity-form-input::placeholder {
+  color: #94A3B8;
+}
+
+.activity-form-input:hover {
+  border-color: #C4B5D6;
+}
+
+.activity-form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.activity-form-textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.activity-form-hint {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.activity-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-sm);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.activity-form-errors {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ==================================================
+   Activity 创建说明卡片
+   ================================================== */
+
+.activity-form-aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.activity-form-aside h2,
+.activity-form-aside p {
+  margin: 0;
+}
+
+.activity-form-aside p,
+.activity-guide-item,
+.activity-guide-note {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+.activity-guide-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+}
+
+.activity-guide-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+}
+
+.activity-guide-note {
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-md);
+  color: var(--color-primary-dark);
+}
+
+/* ==================================================
+   响应式布局
+   ================================================== */
+
+@media (max-width: 1050px) {
+  .activity-form-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .activity-create-header {
+    align-items: stretch;
+  }
+
+  .activity-form-intro {
+    align-items: flex-start;
+  }
+
+  .activity-form-actions,
+  .activity-form-submit {
+    width: 100%;
+  }
+}

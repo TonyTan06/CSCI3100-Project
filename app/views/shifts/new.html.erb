@@ -1,14 +1,76 @@
 
-<h1>Create Shift</h1>
+<div class="page-header shift-form-page-header">
+  <div>
+    <p class="shift-form-kicker">SHIFT MANAGEMENT</p>
+    <h1>Create Shift</h1>
+    <p class="page-subtitle">
+      Schedule a new volunteer shift for your activity.
+    </p>
+  </div>
+  <%= link_to activity_shifts_path(@activity), class: "btn btn-secondary" do %>
+    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M19 12H5m7-7-7 7 7 7"/>
+    </svg>
+    <span>Back to Shifts</span>
+  <% end %>
+</div>
 
-<p>
-  Activity: <%= @activity.title %>
-</p>
+<div class="shift-form-layout">
+  <section class="card shift-form-card" aria-labelledby="shift-form-heading">
+    <div class="shift-form-intro">
+      <div class="shift-form-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="16" rx="2"/>
+          <path d="M16 3v4M8 3v4M3 10h18M12 13v5M9.5 15.5h5"/>
+        </svg>
+      </div>
+      <div>
+        <h2 id="shift-form-heading">Shift Details</h2>
+        <p class="text-muted text-sm">
+          Set the schedule and volunteer capacity for this shift.
+        </p>
+      </div>
+    </div>
 
-<p>
-  Organization: <%= @activity.organization.name %>
-</p>
+    <div class="shift-form-context">
+      <div class="shift-form-context-item">
+        <span>Activity:</span>
+        <strong><%= @activity.title %></strong>
+      </div>
+      <div class="shift-form-context-item">
+        <span>Organization:</span>
+        <strong><%= @activity.organization.name %></strong>
+      </div>
+    </div>
 
-<%= render "form", activity: @activity, shift: @shift %>
+    <%= render "form", activity: @activity, shift: @shift %>
+  </section>
 
-<%= link_to "Back to Shifts", activity_shifts_path(@activity) %>
+  <aside class="card shift-form-aside" aria-labelledby="shift-guide-heading">
+    <div class="shift-guide-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 11v5M12 8h.01"/>
+      </svg>
+    </div>
+    <h2 id="shift-guide-heading">Scheduling Tips</h2>
+    <p>
+      Plan your volunteer shift carefully before publishing the schedule.
+    </p>
+    <div class="shift-guide-item">
+      <span class="shift-guide-dot"></span>
+      <span>Choose a suitable start time for volunteers.</span>
+    </div>
+    <div class="shift-guide-item">
+      <span class="shift-guide-dot"></span>
+      <span>Make sure the end time is later than the start time.</span>
+    </div>
+    <div class="shift-guide-item">
+      <span class="shift-guide-dot"></span>
+      <span>Set a realistic volunteer capacity.</span>
+    </div>
+    <div class="shift-guide-note">
+      When a shift is full, additional eligible volunteers may join the waitlist.
+    </div>
+  </aside>
+</div>

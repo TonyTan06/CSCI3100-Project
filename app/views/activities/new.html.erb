@@ -1,10 +1,70 @@
 
-<h1>Create Activity</h1>
+<div class="page-header activity-create-header">
+  <div>
+    <p class="activity-form-kicker">ACTIVITY MANAGEMENT</p>
+    <h1>Create Activity</h1>
+    <p class="page-subtitle">
+      Create a new volunteer activity for your organization.
+    </p>
+  </div>
+  <%= link_to activities_path, class: "btn btn-secondary" do %>
+    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M19 12H5m7-7-7 7 7 7"/>
+    </svg>
+    <span>Back to Activities</span>
+  <% end %>
+</div>
 
-<p>
-  Organization: <%= Current.user.organization.name %>
-</p>
+<div class="activity-form-layout">
+  <section class="card activity-form-card" aria-labelledby="activity-form-heading">
+    <div class="activity-form-intro">
+      <div class="activity-form-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="16" rx="2"/>
+          <path d="M16 3v4M8 3v4M3 10h18M12 13v5M9.5 15.5h5"/>
+        </svg>
+      </div>
+      <div>
+        <h2 id="activity-form-heading">Activity Details</h2>
+        <p class="text-muted text-sm">
+          Provide the basic information about your activity.
+        </p>
+      </div>
+    </div>
 
-<%= render "form", activity: @activity %>
+    <div class="activity-form-organization">
+      <span>Organization:</span>
+      <strong><%= Current.user.organization.name %></strong>
+    </div>
 
-<%= link_to "Back to Activities", activities_path %>
+    <%= render "form", activity: @activity %>
+  </section>
+
+  <aside class="card activity-form-aside" aria-labelledby="activity-guide-heading">
+    <div class="activity-guide-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 11v5M12 8h.01"/>
+      </svg>
+    </div>
+    <h2 id="activity-guide-heading">Before You Create</h2>
+    <p>
+      Make sure your activity information is clear and helpful for volunteers.
+    </p>
+    <div class="activity-guide-item">
+      <span class="activity-guide-dot"></span>
+      <span>Use a descriptive activity title.</span>
+    </div>
+    <div class="activity-guide-item">
+      <span class="activity-guide-dot"></span>
+      <span>Explain what volunteers will do.</span>
+    </div>
+    <div class="activity-guide-item">
+      <span class="activity-guide-dot"></span>
+      <span>Specify the activity location.</span>
+    </div>
+    <div class="activity-guide-note">
+      You can add volunteer shifts after creating your activity.
+    </div>
+  </aside>
+</div>

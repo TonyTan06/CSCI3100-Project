@@ -1,0 +1,107 @@
+
+/* ==================================================
+   Activity 与 Shift 表单共用错误汇总
+   ================================================== */
+
+.form-validation-summary {
+  padding: var(--spacing-lg);
+  background-color: #FFF1F2;
+  border: 1px solid #FECACA;
+  border-radius: var(--radius-lg);
+  color: #991B1B;
+}
+
+.form-validation-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.form-validation-heading h2 {
+  margin: 0;
+  color: #991B1B;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+}
+
+.form-validation-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: #B91C1C;
+}
+
+.form-validation-description {
+  margin: 0 0 var(--spacing-md);
+  color: #991B1B;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+.form-validation-summary ul {
+  margin: 0;
+  padding-left: var(--spacing-lg);
+}
+
+.form-validation-summary li {
+  margin-bottom: var(--spacing-xs);
+  color: #991B1B;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+/* ==================================================
+   输入框验证失败状态
+   ================================================== */
+
+.activity-form-input.form-field-invalid,
+.shift-form-input.form-field-invalid {
+  border-color: #DC2626;
+  background-color: #FFFBFB;
+}
+
+.activity-form-input.form-field-invalid:focus,
+.shift-form-input.form-field-invalid:focus {
+  border-color: #DC2626;
+  box-shadow: 0 0 0 3px #FEE2E2;
+}
+
+/* ==================================================
+   字段下方的具体错误提示
+   ================================================== */
+
+.form-inline-error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+  margin: 0;
+  color: #B91C1C;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+.form-inline-error::before {
+  content: "!";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ==================================================
+   Rails 自动生成的错误字段容器
+   ================================================== */
+
+.activity-form-field .field_with_errors,
+.shift-form-field .field_with_errors {
+  width: 100%;
+  min-width: 0;
+}

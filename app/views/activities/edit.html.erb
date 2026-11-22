@@ -1,11 +1,69 @@
 
-<h1>Edit Activity</h1>
+<div class="page-header activity-create-header">
+  <div>
+    <p class="activity-form-kicker">ACTIVITY MANAGEMENT</p>
+    <h1>Edit Activity</h1>
+    <p class="page-subtitle">
+      Update the information for your volunteer activity.
+    </p>
+  </div>
+  <%= link_to activity_path(@activity), class: "btn btn-secondary" do %>
+    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M19 12H5m7-7-7 7 7 7"/>
+    </svg>
+    <span>Back to Activity</span>
+  <% end %>
+</div>
 
-<p>
-  Organization: <%= @activity.organization.name %>
-</p>
+<div class="activity-form-layout">
+  <section class="card activity-form-card" aria-labelledby="activity-form-heading">
+    <div class="activity-form-intro">
+      <div class="activity-form-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m16 3 5 5L8 21H3v-5L16 3ZM13 6l5 5"/>
+        </svg>
+      </div>
+      <div>
+        <h2 id="activity-form-heading">Activity Details</h2>
+        <p class="text-muted text-sm">
+          Edit the details of your existing activity.
+        </p>
+      </div>
+    </div>
 
-<%= render "form", activity: @activity %>
+    <div class="activity-form-organization">
+      <span>Organization:</span>
+      <strong><%= @activity.organization.name %></strong>
+    </div>
 
-<%= link_to "Back to Activity", activity_path(@activity) %>
+    <%= render "form", activity: @activity %>
+  </section>
 
+  <aside class="card activity-form-aside" aria-labelledby="activity-guide-heading">
+    <div class="activity-guide-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 11v5M12 8h.01"/>
+      </svg>
+    </div>
+    <h2 id="activity-guide-heading">Editing Tips</h2>
+    <p>
+      Keep your activity information accurate and easy for volunteers to understand.
+    </p>
+    <div class="activity-guide-item">
+      <span class="activity-guide-dot"></span>
+      <span>Make sure the activity title is clear.</span>
+    </div>
+    <div class="activity-guide-item">
+      <span class="activity-guide-dot"></span>
+      <span>Update the description when responsibilities change.</span>
+    </div>
+    <div class="activity-guide-item">
+      <span class="activity-guide-dot"></span>
+      <span>Keep the location information up to date.</span>
+    </div>
+    <div class="activity-guide-note">
+      Changes to this activity will be reflected in its details page.
+    </div>
+  </aside>
+</div>

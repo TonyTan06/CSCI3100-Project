@@ -1,0 +1,270 @@
+
+/* ==================================================
+   Shift 创建与编辑页面布局
+   ================================================== */
+
+.shift-form-page-header {
+  align-items: center;
+}
+
+.shift-form-kicker {
+  margin: 0 0 var(--spacing-sm);
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.shift-form-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: start;
+  gap: var(--spacing-lg);
+}
+
+.shift-form-card,
+.shift-form-aside {
+  min-width: 0;
+}
+
+.shift-form-intro {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.shift-form-intro h2,
+.shift-form-aside h2 {
+  margin: 0 0 var(--spacing-xs);
+  font-size: var(--font-size-lg);
+}
+
+.shift-form-intro p {
+  margin: 0;
+}
+
+.shift-form-icon,
+.shift-guide-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-lg);
+  color: var(--color-primary);
+}
+
+.shift-form-icon svg,
+.shift-guide-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ==================================================
+   Shift 所属活动及机构
+   ================================================== */
+
+.shift-form-context {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-md);
+}
+
+.shift-form-context-item {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  color: var(--color-primary-dark);
+  font-size: var(--font-size-sm);
+}
+
+.shift-form-context-item strong {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* ==================================================
+   Shift 表单
+   ================================================== */
+
+.shift-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.shift-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.shift-form-section-heading h3 {
+  margin: 0 0 var(--spacing-xs);
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+}
+
+.shift-form-section-heading p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.shift-form-time-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-md);
+}
+
+.shift-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  min-width: 0;
+}
+
+.shift-form-label {
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.shift-form-input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 12px 14px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.shift-form-input::placeholder {
+  color: #94A3B8;
+}
+
+.shift-form-input:hover {
+  border-color: #C4B5D6;
+}
+
+.shift-form-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.shift-form-hint {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.shift-form-errors {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ==================================================
+   表单提交按钮
+   ================================================== */
+
+.shift-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ==================================================
+   Scheduling Tips
+   ================================================== */
+
+.shift-form-aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.shift-form-aside h2,
+.shift-form-aside p {
+  margin: 0;
+}
+
+.shift-form-aside p,
+.shift-guide-item,
+.shift-guide-note {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+.shift-guide-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+}
+
+.shift-guide-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+}
+
+.shift-guide-note {
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background-color: var(--color-primary-light);
+  border-radius: var(--radius-md);
+  color: var(--color-primary-dark);
+}
+
+/* ==================================================
+   响应式布局
+   ================================================== */
+
+@media (max-width: 1100px) {
+  .shift-form-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .shift-form-time-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .shift-form-page-header {
+    align-items: stretch;
+  }
+
+  .shift-form-intro {
+    align-items: flex-start;
+  }
+
+  .shift-form-actions,
+  .shift-form-submit {
+    width: 100%;
+  }
+}

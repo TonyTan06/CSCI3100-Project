@@ -1,8 +1,21 @@
 
-<% if shift.errors.any? %>
-  <div>
-    <h2>Unable to save shift</h2>
+<%# Shift 创建及编辑页面共用表单样式 %>
+<%= stylesheet_link_tag "shift_forms", "data-turbo-track": "reload" %>
+<%= stylesheet_link_tag "form_validation", "data-turbo-track": "reload" %>
 
+<%# 显示班次表单的验证错误汇总 %>
+<% if shift.errors.any? %>
+  <div class="validation-errors form-validation-summary" role="alert" aria-labelledby="shift-validation-heading">
+    <div class="form-validation-heading">
+      <svg class="form-validation-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 7v6M12 17h.01"/>
+      </svg>
+      <h2 id="shift-validation-heading">Unable to save shift</h2>
+    </div>
+    <p class="form-validation-description">
+      Please correct the following errors and try again.
+    </p>
     <ul>
       <% shift.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,23 +24,86 @@
   </div>
 <% end %>
 
-<%= form_with model: [activity, shift], local: true do |form| %>
-  <div>
-    <%= form.label :start_time %>
-    <%= form.datetime_local_field :start_time, required: true %>
+<%= form_with model: [activity, shift], local: true, html: { class: "shift-form-fields" } do |form| %>
+  <div class="shift-form-section">
+    <div class="shift-form-section-heading">
+      <h3>Schedule</h3>
+      <p>Choose when the volunteer shift will take place.</p>
+    </div>
+    <div class="shift-form-time-grid">
+      <div class="shift-form-field">
+        <% start_invalid = shift.errors[:start_time].any? %>
+        <%= form.label :start_time, class: "shift-form-label" %>
+        <%= form.datetime_local_field :start_time,
+                                      required: true,
+                                      class: "shift-form-input #{'form-field-invalid' if start_invalid}",
+                                      aria: {
+                                        invalid: start_invalid,
+                                        describedby: "shift-start-hint#{' shift-start-error' if start_invalid}"
+                                      } %>
+        <p id="shift-start-hint" class="shift-form-hint">
+          When volunteers should arrive.
+        </p>
+        <% if start_invalid %>
+          <p id="shift-start-error" class="form-inline-error">
+            <%= shift.errors.full_messages_for(:start_time).to_sentence %>
+          </p>
+        <% end %>
+      </div>
+
+      <div class="shift-form-field">
+        <% end_invalid = shift.errors[:end_time].any? %>
+        <%= form.label :end_time, class: "shift-form-label" %>
+        <%= form.datetime_local_field :end_time,
+                                      required: true,
+                                      class: "shift-form-input #{'form-field-invalid' if end_invalid}",
+                                      aria: {
+                                        invalid: end_invalid,
+                                        describedby: "shift-end-hint#{' shift-end-error' if end_invalid}"
+                                      } %>
+        <p id="shift-end-hint" class="shift-form-hint">
+          When the shift is expected to finish.
+        </p>
+        <% if end_invalid %>
+          <p id="shift-end-error" class="form-inline-error">
+            <%= shift.errors.full_messages_for(:end_time).to_sentence %>
+          </p>
+        <% end %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :end_time %>
-    <%= form.datetime_local_field :end_time, required: true %>
+  <div class="shift-form-section">
+    <div class="shift-form-section-heading">
+      <h3>Volunteer Capacity</h3>
+      <p>Specify the number of available volunteer places.</p>
+    </div>
+    <div class="shift-form-field">
+      <% capacity_invalid = shift.errors[:capacity].any? %>
+      <%= form.label :capacity, class: "shift-form-label" %>
+      <%= form.number_field :capacity,
+                            min: 1,
+                            step: 1,
+                            required: true,
+                            placeholder: "e.g. 10",
+                            class: "shift-form-input #{'form-field-invalid' if capacity_invalid}",
+                            aria: {
+                              invalid: capacity_invalid,
+                              describedby: "shift-capacity-hint#{' shift-capacity-error' if capacity_invalid}"
+                            } %>
+      <p id="shift-capacity-hint" class="shift-form-hint">
+        Capacity must be at least 1 volunteer.
+      </p>
+      <% if capacity_invalid %>
+        <p id="shift-capacity-error" class="form-inline-error">
+          <%= shift.errors.full_messages_for(:capacity).to_sentence %>
+        </p>
+      <% end %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :capacity %>
-    <%= form.number_field :capacity, min: 1, step: 1, required: true %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="shift-form-actions">
+    <%= form.submit shift.persisted? ? "Update Shift" : "Create Shift",
+                    class: "btn btn-primary shift-form-submit" %>
   </div>
 <% end %>

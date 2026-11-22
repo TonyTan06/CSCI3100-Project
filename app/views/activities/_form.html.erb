@@ -1,54 +1,96 @@
 
+<%# Activity 创建及编辑页面共用表单样式 %>
+<%= stylesheet_link_tag "activity_forms", "data-turbo-track": "reload" %>
+<%= stylesheet_link_tag "form_validation", "data-turbo-track": "reload" %>
+
+<%# 显示活动表单的验证错误汇总 %>
 <% if activity.errors.any? %>
-
-  <div>
-
-    <h2>Unable to save activity</h2>
-
+  <div class="validation-errors form-validation-summary" role="alert" aria-labelledby="activity-validation-heading">
+    <div class="form-validation-heading">
+      <svg class="form-validation-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 7v6M12 17h.01"/>
+      </svg>
+      <h2 id="activity-validation-heading">Unable to save activity</h2>
+    </div>
+    <p class="form-validation-description">
+      Please correct the following errors and try again.
+    </p>
     <ul>
-
       <% activity.errors.full_messages.each do |message| %>
-
         <li><%= message %></li>
-
       <% end %>
-
     </ul>
-
   </div>
-
 <% end %>
 
-<%= form_with model: activity, local: true do |form| %>
-
-  <div>
-
-    <%= form.label :title %>
-
-    <%= form.text_field :title, required: true %>
-
+<%= form_with model: activity, local: true, html: { class: "activity-form-fields" } do |form| %>
+  <div class="activity-form-field">
+    <% title_invalid = activity.errors[:title].any? %>
+    <%= form.label :title, class: "activity-form-label" %>
+    <%= form.text_field :title,
+                        required: true,
+                        placeholder: "e.g. Campus Community Cleanup",
+                        class: "activity-form-input #{'form-field-invalid' if title_invalid}",
+                        aria: {
+                          invalid: title_invalid,
+                          describedby: "activity-title-hint#{' activity-title-error' if title_invalid}"
+                        } %>
+    <p id="activity-title-hint" class="activity-form-hint">
+      Choose a clear and recognizable name for your activity.
+    </p>
+    <% if title_invalid %>
+      <p id="activity-title-error" class="form-inline-error">
+        <%= activity.errors.full_messages_for(:title).to_sentence %>
+      </p>
+    <% end %>
   </div>
 
-  <div>
-
-    <%= form.label :description %>
-
-    <%= form.text_area :description, required: true %>
-
+  <div class="activity-form-field">
+    <% description_invalid = activity.errors[:description].any? %>
+    <%= form.label :description, class: "activity-form-label" %>
+    <%= form.text_area :description,
+                       required: true,
+                       rows: 6,
+                       placeholder: "Describe the activity, volunteer responsibilities, and goals...",
+                       class: "activity-form-input activity-form-textarea #{'form-field-invalid' if description_invalid}",
+                       aria: {
+                         invalid: description_invalid,
+                         describedby: "activity-description-hint#{' activity-description-error' if description_invalid}"
+                       } %>
+    <p id="activity-description-hint" class="activity-form-hint">
+      Let volunteers know what to expect when participating.
+    </p>
+    <% if description_invalid %>
+      <p id="activity-description-error" class="form-inline-error">
+        <%= activity.errors.full_messages_for(:description).to_sentence %>
+      </p>
+    <% end %>
   </div>
 
-  <div>
-
-    <%= form.label :location %>
-
-    <%= form.text_field :location, required: true %>
-
+  <div class="activity-form-field">
+    <% location_invalid = activity.errors[:location].any? %>
+    <%= form.label :location, class: "activity-form-label" %>
+    <%= form.text_field :location,
+                        required: true,
+                        placeholder: "e.g. CUHK Main Campus",
+                        class: "activity-form-input #{'form-field-invalid' if location_invalid}",
+                        aria: {
+                          invalid: location_invalid,
+                          describedby: "activity-location-hint#{' activity-location-error' if location_invalid}"
+                        } %>
+    <p id="activity-location-hint" class="activity-form-hint">
+      Enter the place where the activity will take place.
+    </p>
+    <% if location_invalid %>
+      <p id="activity-location-error" class="form-inline-error">
+        <%= activity.errors.full_messages_for(:location).to_sentence %>
+      </p>
+    <% end %>
   </div>
 
-  <div>
-
-    <%= form.submit %>
-
+  <div class="activity-form-actions">
+    <%= form.submit activity.persisted? ? "Update Activity" : "Create Activity",
+                    class: "btn btn-primary activity-form-submit" %>
   </div>
-
 <% end %>
