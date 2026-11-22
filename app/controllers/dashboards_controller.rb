@@ -60,7 +60,7 @@ class DashboardsController < ApplicationController
     @shifts_by_activity = {}
     @activities.each do |activity|
       @shifts_by_activity[activity.id] = activity.shifts.sort_by do |shift|
-        [shift.start_time, shift.id]
+        [ shift.start_time, shift.id ]
       end
     end
 

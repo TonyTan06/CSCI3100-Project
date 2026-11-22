@@ -10,7 +10,7 @@ class SignupsController < ApplicationController
   before_action :set_shift
 
   # 取消报名时查找当前用户的报名记录
-  before_action :set_signup, only: [:destroy]
+  before_action :set_signup, only: [ :destroy ]
 
   # ==================================================
   # 班次报名

@@ -3,7 +3,6 @@ require 'rails_helper'
 
 RSpec.describe Shift, type: :model do
   describe "capacity management" do
-
     # Test 1: 正确统计已确认报名人数
     it "counts confirmed signups correctly" do
       # 1. 创建活动所属的 Organization

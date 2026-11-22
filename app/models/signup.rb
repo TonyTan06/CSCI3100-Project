@@ -8,12 +8,12 @@ class Signup < ApplicationRecord
 
   # 报名记录必须拥有合法的状态
   validates :status, inclusion: {
-    in: ["confirmed", "waitlisted", "cancelled"]
+    in: [ "confirmed", "waitlisted", "cancelled" ]
   }
 
   # 报名记录必须拥有合法的出勤状态
   validates :attendance_status, inclusion: {
-    in: ["pending", "present", "absent"]
+    in: [ "pending", "present", "absent" ]
   }
 
   # 仅允许 Volunteer 报名

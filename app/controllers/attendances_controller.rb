@@ -8,7 +8,7 @@ class AttendancesController < ApplicationController
   before_action :set_shift
 
   # 修改出勤时查找指定报名记录
-  before_action :set_signup, only: [:update]
+  before_action :set_signup, only: [ :update ]
 
   # ==================================================
   # 出勤名单查看

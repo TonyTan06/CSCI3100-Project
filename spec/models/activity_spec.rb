@@ -3,7 +3,6 @@ require 'rails_helper'
 
 RSpec.describe Activity, type: :model do
   describe "validations" do
-
     # Test 1: 活动必须拥有名称
     it "requires a title" do
       # 1. 创建活动所属的 Organization
@@ -118,7 +117,6 @@ RSpec.describe Activity, type: :model do
   end
 
   describe "associations" do
-
     # Test 6: Organization 可以拥有多个 Activity
     it "allows an organization to have multiple activities" do
       # 1. 创建活动所属的 Organization

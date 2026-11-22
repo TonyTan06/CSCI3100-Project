@@ -1,7 +1,7 @@
 
 class RegistrationsController < ApplicationController
   # 允许未登录用户访问注册页面和提交注册请求
-  allow_unauthenticated_access only: [:new, :create]
+  allow_unauthenticated_access only: [ :new, :create ]
 
   # 显示用户注册页面
   def new

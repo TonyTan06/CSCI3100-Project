@@ -3,7 +3,6 @@ require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
   describe "validations" do
-
     # Test 1: 组织必须拥有名称
     it "requires a name" do
       # 1. 创建名称为空的 Organization
@@ -31,7 +30,6 @@ RSpec.describe Organization, type: :model do
   end
 
   describe "associations" do
-
     # Test 3: Organization 可以关联 Organizer 用户
     it "has associated organizer users" do
       # 1. 创建一个 Organization

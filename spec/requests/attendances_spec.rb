@@ -232,7 +232,7 @@ RSpec.describe "Attendances", type: :request do
         rows = document.css("table tr")
 
         # 5. 检查每位正式报名用户的出勤状态
-        [signup_a, signup_b, signup_c].each do |signup|
+        [ signup_a, signup_b, signup_c ].each do |signup|
           row = rows.find do |element|
             element.text.include?(
               signup.user.email_address
@@ -1078,7 +1078,7 @@ RSpec.describe "Attendances", type: :request do
         document = Nokogiri::HTML(response.body)
 
         # 1. 获取正式报名人员对应的表单
-        [signup_a, signup_b, signup_c].each do |signup|
+        [ signup_a, signup_b, signup_c ].each do |signup|
           form = attendance_form(document, signup)
           expect(form).not_to be_nil
 
@@ -1124,7 +1124,7 @@ RSpec.describe "Attendances", type: :request do
         expect(response).to have_http_status(:ok)
         document = Nokogiri::HTML(response.body)
 
-        [signup_a, signup_b, signup_c].each do |signup|
+        [ signup_a, signup_b, signup_c ].each do |signup|
           # 1. 获取对应的出勤表单
           form = attendance_form(document, signup)
           expect(form).not_to be_nil
@@ -1141,7 +1141,7 @@ RSpec.describe "Attendances", type: :request do
           end
 
           expect(option_values).to eq(
-            ["pending", "present", "absent"]
+            [ "pending", "present", "absent" ]
           )
 
           # 4. 检查默认选项与数据库一致
@@ -1169,7 +1169,7 @@ RSpec.describe "Attendances", type: :request do
         sign_in_as(volunteer_a)
 
         # 检查三种合法出勤状态的页面显示
-        ["pending", "present", "absent"].each do |status|
+        [ "pending", "present", "absent" ].each do |status|
           # 1. 设置测试所需的出勤状态
           signup_a.update!(
             attendance_status: status
@@ -1300,5 +1300,4 @@ RSpec.describe "Attendances", type: :request do
       end
     end
   end
-
 end

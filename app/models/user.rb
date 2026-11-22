@@ -14,7 +14,7 @@ class User < ApplicationRecord
   validates :email_address, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   validates :role, inclusion: {
-    in: ["volunteer", "organizer"]
+    in: [ "volunteer", "organizer" ]
   }
 
   # Organizer 必须属于一个 Organization

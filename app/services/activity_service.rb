@@ -1,9 +1,7 @@
 
 class ActivityService
-
   # 创建活动
   def self.create(user:, attributes:)
-
     # 1. 初始化 Activity 对象
     activity = Activity.new
 
@@ -39,7 +37,6 @@ class ActivityService
 
   # 修改活动
   def self.update(user:, activity:, attributes:)
-
     # 1. 从数据库重新读取活动记录
     activity.reload
 

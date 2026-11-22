@@ -3,7 +3,6 @@ require 'rails_helper'
 
 RSpec.describe Signup, type: :model do
   describe "validations" do
-
     # Test 1: 报名记录必须属于一个 User
     it "requires a user" do
       # 1. 创建活动所属的 Organization
@@ -438,7 +437,6 @@ RSpec.describe Signup, type: :model do
   end
 
   describe "associations" do
-
     # Test 10: User 可以关联多个 Signup
     it "allows a user to have multiple signups" do
       # 1. 创建活动所属的 Organization

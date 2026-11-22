@@ -2,7 +2,6 @@
 require 'rails_helper'
 
 RSpec.describe ActivityService do
-
   # ==================================================
   # 公共测试数据
   # ==================================================
@@ -72,10 +71,8 @@ RSpec.describe ActivityService do
   # ==================================================
 
   describe ".create" do
-
     # Test 1: Organizer 可以成功创建活动
     it "allows an organizer to create an activity" do
-
       result = nil
 
       expect {
@@ -107,7 +104,6 @@ RSpec.describe ActivityService do
 
     # Test 2: 自动分配 Organizer 所属组织
     it "automatically assigns the organizer's organization" do
-
       result = ActivityService.create(
         user: organizer,
         attributes: valid_attributes
@@ -127,7 +123,6 @@ RSpec.describe ActivityService do
 
     # Test 3: 禁止 Volunteer 创建活动
     it "rejects activity creation requests from volunteers" do
-
       result = nil
 
       expect {
@@ -146,7 +141,6 @@ RSpec.describe ActivityService do
 
     # Test 4: 禁止通过参数创建其他组织的活动
     it "ignores attempts to assign an activity to another organization" do
-
       attributes = valid_attributes.merge(
         organization_id: other_organization.id,
         organization: other_organization
@@ -171,7 +165,6 @@ RSpec.describe ActivityService do
 
     # Test 5: 拒绝无效的活动数据
     it "rejects activity creation with invalid attributes" do
-
       attributes = {
         title: "",
         description: "",
@@ -209,10 +202,8 @@ RSpec.describe ActivityService do
   # ==================================================
 
   describe ".update" do
-
     # Test 6: Organizer 可以修改自己组织的活动
     it "allows an organizer to update their own activity" do
-
       original_id = activity.id
       original_created_at = activity.created_at
 
@@ -256,7 +247,6 @@ RSpec.describe ActivityService do
 
     # Test 7: 禁止 Volunteer 修改活动
     it "rejects activity update requests from volunteers" do
-
       original_title = activity.title
       original_updated_at = activity.updated_at
 
@@ -283,7 +273,6 @@ RSpec.describe ActivityService do
 
     # Test 8: 禁止 Organizer 修改其他组织的活动
     it "rejects updates to activities belonging to another organization" do
-
       original_title = activity.title
       original_updated_at = activity.updated_at
 
@@ -310,7 +299,6 @@ RSpec.describe ActivityService do
 
     # Test 9: 禁止修改活动所属组织
     it "ignores attempts to change an activity's organization" do
-
       result = ActivityService.update(
         user: organizer,
         activity: activity,
@@ -341,7 +329,6 @@ RSpec.describe ActivityService do
 
     # Test 10: 拒绝无效的活动修改
     it "rejects invalid activity updates without changing stored data" do
-
       original_title = activity.title
       original_description = activity.description
       original_location = activity.location

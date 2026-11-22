@@ -3,7 +3,6 @@ require 'rails_helper'
 require 'nokogiri'
 
 RSpec.describe "Activities", type: :request do
-
   # ==================================================
   # 公共测试数据
   # ==================================================
@@ -80,7 +79,6 @@ RSpec.describe "Activities", type: :request do
   # ==================================================
 
   describe "unauthenticated access" do
-
     # Test 1: 未登录用户不能查看活动列表
     it "redirects unauthenticated users to login when viewing activities" do
       get "/activities"
@@ -237,7 +235,6 @@ RSpec.describe "Activities", type: :request do
   # ==================================================
 
   describe "activity creation" do
-
     # 创建活动时使用的合法参数
     let(:valid_activity_attributes) do
       {
@@ -252,7 +249,6 @@ RSpec.describe "Activities", type: :request do
     # ==================================================
 
     context "unauthenticated access" do
-
       # Test 8: 未登录用户不能查看创建活动页面
       it "redirects unauthenticated users when accessing the new activity page" do
         get "/activities/new"
@@ -475,7 +471,6 @@ RSpec.describe "Activities", type: :request do
   # ==================================================
 
   describe "activity editing" do
-
     # 修改活动时使用的合法参数
     let(:updated_activity_attributes) do
       {
@@ -490,7 +485,6 @@ RSpec.describe "Activities", type: :request do
     # ==================================================
 
     context "unauthenticated access" do
-
       # Test 16: 未登录用户不能查看编辑页面
       it "redirects unauthenticated users when accessing the edit activity page" do
         get "/activities/#{activity_a.id}/edit"
@@ -780,5 +774,4 @@ RSpec.describe "Activities", type: :request do
       end
     end
   end
-
 end

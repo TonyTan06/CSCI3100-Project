@@ -2,7 +2,6 @@
 require 'rails_helper'
 
 RSpec.describe ShiftCreateService do
-
   # ==================================================
   # 公共测试数据
   # ==================================================
@@ -88,10 +87,8 @@ RSpec.describe ShiftCreateService do
   # ==================================================
 
   describe ".call" do
-
     # Test 1: Organizer 可以成功创建自己组织的班次
     it "allows an organizer to create a shift for their own activity" do
-
       result = nil
 
       expect {
@@ -130,7 +127,6 @@ RSpec.describe ShiftCreateService do
 
     # Test 2: 同一个活动可以创建多个班次
     it "allows an organizer to create multiple shifts for an activity" do
-
       first_shift = ShiftCreateService.call(
         user: organizer,
         activity: activity,
@@ -167,7 +163,6 @@ RSpec.describe ShiftCreateService do
 
     # Test 3: 禁止 Volunteer 创建班次
     it "rejects shift creation requests from volunteers" do
-
       result = nil
 
       expect {
@@ -187,7 +182,6 @@ RSpec.describe ShiftCreateService do
 
     # Test 4: 禁止 Organizer 为其他组织创建班次
     it "rejects shift creation for activities belonging to another organization" do
-
       result = nil
 
       expect {
@@ -207,10 +201,8 @@ RSpec.describe ShiftCreateService do
 
     # Test 5: 拒绝非法班次容量
     it "rejects shifts with invalid capacity values" do
-
       # 分别测试零、负数和非整数容量
-      [0, -5, 1.5].each do |invalid_capacity|
-
+      [ 0, -5, 1.5 ].each do |invalid_capacity|
         result = nil
 
         expect {
@@ -230,14 +222,12 @@ RSpec.describe ShiftCreateService do
 
     # Test 6: 拒绝非法班次时间
     it "rejects shifts ending before or at their start time" do
-
       invalid_end_times = [
         start_time,
         start_time - 1.hour
       ]
 
       invalid_end_times.each do |invalid_end_time|
-
         result = nil
 
         expect {
@@ -260,7 +250,6 @@ RSpec.describe ShiftCreateService do
 
     # Test 7: 拒绝缺少必要属性的班次
     it "rejects shifts with missing required attributes" do
-
       result = nil
 
       expect {
@@ -288,7 +277,6 @@ RSpec.describe ShiftCreateService do
 
     # Test 8: 禁止通过参数改变班次所属活动
     it "ignores attempts to assign a shift to another activity through attributes" do
-
       attributes = valid_attributes.merge(
         activity_id: other_activity.id,
         activity: other_activity

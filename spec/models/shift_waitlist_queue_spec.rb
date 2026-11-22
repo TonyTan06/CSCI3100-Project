@@ -104,7 +104,6 @@ RSpec.describe Shift, type: :model do
   # ==================================================
 
   describe "#waitlist_queue" do
-
     # Test 1: 没有候补报名时返回空队列
     it "returns an empty queue when there are no waitlisted signups" do
       # 1. 检查班次没有任何报名记录
@@ -152,7 +151,7 @@ RSpec.describe Shift, type: :model do
 
       # 5. 检查候补队列是否按照时间而不是 ID 排序
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_a, signup_b, signup_c]
+        [ signup_a, signup_b, signup_c ]
       )
 
       # 6. 检查候补队列人数
@@ -187,7 +186,7 @@ RSpec.describe Shift, type: :model do
 
       # 5. 检查候补队列仅包含 waitlisted 报名
       expect(shift.waitlist_queue.to_a).to eq(
-        [waitlisted_signup]
+        [ waitlisted_signup ]
       )
 
       # 6. 检查正式报名不在候补队列中
@@ -235,7 +234,7 @@ RSpec.describe Shift, type: :model do
 
       # 6. 检查候补队列是否按照 ID 升序排序
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_a, signup_b, signup_c]
+        [ signup_a, signup_b, signup_c ]
       )
     end
 
@@ -262,12 +261,12 @@ RSpec.describe Shift, type: :model do
 
       # 4. 检查当前班次的候补队列
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_a]
+        [ signup_a ]
       )
 
       # 5. 检查另一个班次的候补队列
       expect(other_shift.waitlist_queue.to_a).to eq(
-        [signup_b]
+        [ signup_b ]
       )
 
       # 6. 检查两个候补队列是否相互独立
@@ -298,7 +297,7 @@ RSpec.describe Shift, type: :model do
 
       # 3. 检查原有候补队列顺序
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_a, signup_b]
+        [ signup_a, signup_b ]
       )
 
       # 4. 模拟第一个 Volunteer 取消候补报名
@@ -310,7 +309,7 @@ RSpec.describe Shift, type: :model do
 
       # 6. 检查已取消报名是否从队列中移除
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_b]
+        [ signup_b ]
       )
 
       # 7. 检查候补队列人数是否减少
@@ -358,7 +357,7 @@ RSpec.describe Shift, type: :model do
 
       # 6. 检查原有候补队列顺序
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_a, signup_b, signup_c]
+        [ signup_a, signup_b, signup_c ]
       )
 
       # 7. 保存 Volunteer A 原有报名记录的信息
@@ -373,7 +372,7 @@ RSpec.describe Shift, type: :model do
 
       # 9. 检查 Volunteer A 是否已经离开候补队列
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_b, signup_c]
+        [ signup_b, signup_c ]
       )
 
       # 10. 初始化用于保存重新报名结果的变量
@@ -381,7 +380,6 @@ RSpec.describe Shift, type: :model do
 
       # 11. 在更晚的时间通过 SignupService 重新报名
       travel_to(initial_time + 30.minutes) do
-
         # 检查重新报名不会创建新的记录
         expect {
           returning_signup = SignupService.call(
@@ -422,7 +420,7 @@ RSpec.describe Shift, type: :model do
 
       # 19. 检查 Volunteer A 是否排到了队尾
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_b, signup_c, returning_signup]
+        [ signup_b, signup_c, returning_signup ]
       )
 
       # 20. 检查候补队列人数是否恢复为 3
@@ -453,7 +451,7 @@ RSpec.describe Shift, type: :model do
 
       # 3. 检查原有候补队列顺序
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_a, signup_b]
+        [ signup_a, signup_b ]
       )
 
       # 4. 检查班次是否拥有一个空余名额
@@ -472,7 +470,7 @@ RSpec.describe Shift, type: :model do
 
       # 8. 检查已转正用户是否离开候补队列
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_b]
+        [ signup_b ]
       )
 
       # 9. 检查候补队列人数是否减少

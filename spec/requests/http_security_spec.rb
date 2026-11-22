@@ -127,7 +127,7 @@ RSpec.describe "HTTP Security", type: :request do
         request_method,
         request_path,
         {
-          parameter_key => ["invalid", "data"]
+          parameter_key => [ "invalid", "data" ]
         }
       )
     end
@@ -291,7 +291,7 @@ RSpec.describe "HTTP Security", type: :request do
         expect_rejected_request(
           :patch,
           activity_path(activity),
-          { activity: ["invalid"] },
+          { activity: [ "invalid" ] },
           :forbidden
         )
       end
@@ -311,7 +311,7 @@ RSpec.describe "HTTP Security", type: :request do
         expect_rejected_request(
           :patch,
           activity_shift_path(activity, shift),
-          { shift: ["invalid"] },
+          { shift: [ "invalid" ] },
           :forbidden
         )
       end
@@ -355,7 +355,7 @@ RSpec.describe "HTTP Security", type: :request do
         expect_rejected_request(
           :patch,
           activity_shift_path(activity, shift),
-          { shift: ["invalid"] },
+          { shift: [ "invalid" ] },
           :not_found
         )
       end
@@ -854,6 +854,4 @@ RSpec.describe "HTTP Security", type: :request do
       expect(database_snapshot).to eq(original_snapshot)
     end
   end
-
 end
-

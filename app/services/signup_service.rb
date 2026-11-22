@@ -1,12 +1,9 @@
 
 class SignupService
-
   # 处理 Volunteer 的班次报名请求
   def self.call(user:, shift:)
-
     # 1. 开启数据库事务
     ActiveRecord::Base.transaction(requires_new: true) do
-
       # 2. 从数据库重新读取班次记录
       shift.reload
 
@@ -52,7 +49,6 @@ class SignupService
 
       # 7. 返回 Signup 对象
       signup
-
     end
   end
 end

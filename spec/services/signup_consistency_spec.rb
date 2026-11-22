@@ -2,7 +2,6 @@
 require 'rails_helper'
 
 RSpec.describe "Signup data consistency" do
-
   # ==================================================
   # 公共测试数据
   # ==================================================
@@ -79,7 +78,6 @@ RSpec.describe "Signup data consistency" do
 
   # Test 1: 使用过期容量不能导致超额报名
   it "uses the latest capacity when signing up with a stale shift object" do
-
     # 1. Volunteer A 占用一个正式名额
     Signup.create!(
       user: volunteer_a,
@@ -129,7 +127,6 @@ RSpec.describe "Signup data consistency" do
 
   # Test 2: 使用过期容量不能错误分配候补状态
   it "confirms a signup when the latest capacity has available slots" do
-
     # 1. 将初始容量设置为 1
     shift.update!(capacity: 1)
 
@@ -185,7 +182,6 @@ RSpec.describe "Signup data consistency" do
 
   # Test 3: 必须使用最新班次时间检查报名冲突
   it "uses the latest shift times when checking signup conflicts" do
-
     # 1. Volunteer A 已经报名另一个班次
     Signup.create!(
       user: volunteer_a,
@@ -244,7 +240,6 @@ RSpec.describe "Signup data consistency" do
 
   # Test 4: 在读取班次数据之前开启数据库事务
   it "opens a transaction before reading shift data" do
-
     # 1. 提前创建测试数据
     shift
     volunteer_a
@@ -259,7 +254,6 @@ RSpec.describe "Signup data consistency" do
     expect(shift)
       .to receive(:reload)
       .and_wrap_original do |original|
-
         expect(
           connection.open_transactions
         ).to be > original_transaction_count
@@ -287,7 +281,6 @@ RSpec.describe "Signup data consistency" do
 
   # Test 5: 报名保存后发生异常时回滚数据库
   it "rolls back signup creation when an error occurs after saving" do
-
     # 1. 创建尚未保存的报名对象
     signup = Signup.new(
       user: volunteer_a,
@@ -314,7 +307,6 @@ RSpec.describe "Signup data consistency" do
     allow(signup)
       .to receive(:save)
       .and_wrap_original do |original|
-
         # 执行真正的数据库保存
         expect(original.call).to be true
 
@@ -350,5 +342,4 @@ RSpec.describe "Signup data consistency" do
     expect(shift.reload.confirmed_count).to eq(0)
     expect(shift.available_slots).to eq(2)
   end
-
 end

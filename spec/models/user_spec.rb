@@ -3,7 +3,6 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe "validations" do
-
     # Test 1: 用户必须提供邮箱地址
     it "requires an email address" do
       # 1. 创建邮箱为空、密码有效的 User

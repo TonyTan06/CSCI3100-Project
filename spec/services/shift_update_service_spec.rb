@@ -147,10 +147,8 @@ RSpec.describe ShiftUpdateService do
   # ==================================================
 
   describe ".call" do
-
     # Test 1: Organizer 可以增加自己组织的班次容量
     it "allows an organizer to increase capacity for their own shift" do
-
       result = ShiftUpdateService.call(
         user: organizer,
         shift: shift,
@@ -170,7 +168,6 @@ RSpec.describe ShiftUpdateService do
 
     # Test 2: 增加容量后自动递补第一位候补用户
     it "promotes the first waitlisted signup when capacity increases" do
-
       signup_a = create_confirmed_signup(
         user: volunteer_a,
         shift: shift
@@ -212,13 +209,12 @@ RSpec.describe ShiftUpdateService do
       expect(signup_b.waitlisted_at).to be_nil
 
       expect(shift.confirmed_count).to eq(2)
-      expect(shift.waitlist_queue.to_a).to eq([signup_c])
+      expect(shift.waitlist_queue.to_a).to eq([ signup_c ])
       expect(shift.full?).to be true
     end
 
     # Test 3: 增加多个名额后连续递补
     it "promotes multiple waitlisted signups when several slots are added" do
-
       create_confirmed_signup(
         user: volunteer_a,
         shift: shift
@@ -260,13 +256,12 @@ RSpec.describe ShiftUpdateService do
       expect(signup_d.reload.status).to eq("waitlisted")
 
       expect(shift.confirmed_count).to eq(3)
-      expect(shift.waitlist_queue.to_a).to eq([signup_d])
+      expect(shift.waitlist_queue.to_a).to eq([ signup_d ])
       expect(shift.available_slots).to eq(0)
     end
 
     # Test 4: 自动跳过存在时间冲突的候补用户
     it "skips conflicting waitlisted signups when capacity increases" do
-
       create_confirmed_signup(
         user: volunteer_a,
         shift: shift
@@ -318,13 +313,12 @@ RSpec.describe ShiftUpdateService do
         "confirmed"
       )
 
-      expect(shift.waitlist_queue.to_a).to eq([signup_b])
+      expect(shift.waitlist_queue.to_a).to eq([ signup_b ])
       expect(shift.full?).to be true
     end
 
     # Test 5: 合法减少容量时不触发递补
     it "allows a valid capacity decrease without automatic promotion" do
-
       shift.update!(capacity: 3)
 
       signup_a = create_confirmed_signup(
@@ -350,7 +344,6 @@ RSpec.describe ShiftUpdateService do
 
     # Test 6: 禁止容量低于已确认报名人数
     it "rejects capacity below the number of confirmed signups" do
-
       shift.update!(capacity: 2)
 
       create_confirmed_signup(
@@ -385,7 +378,6 @@ RSpec.describe ShiftUpdateService do
 
     # Test 7: 合法修改班次时间
     it "allows a valid shift time change" do
-
       signup = create_confirmed_signup(
         user: volunteer_a,
         shift: shift
@@ -417,7 +409,6 @@ RSpec.describe ShiftUpdateService do
 
     # Test 8: 禁止造成已有正式报名时间冲突的修改
     it "rejects a time change that creates a confirmed signup conflict" do
-
       create_confirmed_signup(
         user: volunteer_a,
         shift: shift
@@ -456,7 +447,6 @@ RSpec.describe ShiftUpdateService do
 
     # Test 9: 禁止 Volunteer 修改班次
     it "rejects shift update requests from volunteers" do
-
       original_updated_at = shift.updated_at
 
       expect(WaitlistService).not_to receive(:call)
@@ -482,7 +472,6 @@ RSpec.describe ShiftUpdateService do
 
     # Test 10: 禁止 Organizer 修改其他组织的班次
     it "rejects updates to shifts belonging to another organization" do
-
       original_updated_at = shift.updated_at
 
       expect(WaitlistService).not_to receive(:call)
@@ -508,7 +497,6 @@ RSpec.describe ShiftUpdateService do
 
     # Test 11: 容量未变化时不触发递补
     it "does not trigger promotion when capacity remains unchanged" do
-
       create_confirmed_signup(
         user: volunteer_a,
         shift: shift
@@ -546,7 +534,6 @@ RSpec.describe ShiftUpdateService do
 
     # Test 12: 递补发生系统异常时回滚容量修改
     it "rolls back capacity changes and promotions when promotion raises an error" do
-
       signup_a = create_confirmed_signup(
         user: volunteer_a,
         shift: shift
@@ -566,7 +553,6 @@ RSpec.describe ShiftUpdateService do
       allow(WaitlistService)
         .to receive(:call)
         .with(shift: shift) do
-
           signup_b.reload
           signup_b.update!(status: "confirmed")
 

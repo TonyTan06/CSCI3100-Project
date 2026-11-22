@@ -1,8 +1,7 @@
 
 class ActivitiesController < ApplicationController
-
   # 仅允许 Organizer 创建及修改活动
-  before_action :require_organizer, only: [:new, :create, :edit, :update]
+  before_action :require_organizer, only: [ :new, :create, :edit, :update ]
 
   # ==================================================
   # 活动查看
@@ -11,7 +10,24 @@ class ActivitiesController < ApplicationController
   # GET /activities
   # 显示当前用户有权限查看的活动列表
   def index
-    @activities = accessible_activities.order(:id)
+    # 1. 读取并清理搜索关键词
+    @search_query = params[:q].to_s.strip
+
+    # 2. 先获取当前用户有权限查看的活动
+    activities = accessible_activities
+
+    # 3. 如果输入了关键词，根据活动标题或地点进行搜索
+    if @search_query.present?
+      search_term = "%#{Activity.sanitize_sql_like(@search_query.downcase)}%"
+
+      activities = activities.where(
+        "LOWER(title) LIKE :query OR LOWER(location) LIKE :query",
+        query: search_term
+      )
+    end
+
+    # 4. 按 ID 排序并保存搜索结果
+    @activities = activities.order(:id)
   end
 
   # GET /activities/:id

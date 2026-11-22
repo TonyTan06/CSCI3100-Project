@@ -86,7 +86,6 @@ RSpec.describe Signup, type: :model do
   # ==================================================
 
   describe "waitlist timestamp management" do
-
     # Test 1: 首次正式报名不记录候补时间
     it "does not set waitlisted_at for a confirmed signup" do
       # 1. 创建一条正式报名记录
@@ -110,7 +109,6 @@ RSpec.describe Signup, type: :model do
     it "automatically sets waitlisted_at for a new waitlisted signup" do
       # 1. 将系统时间固定在 initial_time
       travel_to(initial_time) do
-
         # 2. 创建一条候补报名记录
         # 不手动提供 waitlisted_at
         signup = Signup.create!(
@@ -143,7 +141,6 @@ RSpec.describe Signup, type: :model do
 
       # 4. 将系统时间移动到十分钟后
       travel_to(later_time) do
-
         # 5. 在不改变报名状态的情况下再次保存
         signup.update!(status: "waitlisted")
 
@@ -218,7 +215,6 @@ RSpec.describe Signup, type: :model do
 
       # 5. 将系统时间移动到十分钟后
       travel_to(later_time) do
-
         # 6. 重新加入候补队列
         signup.update!(status: "waitlisted")
 
@@ -253,7 +249,6 @@ RSpec.describe Signup, type: :model do
 
       # 3. 将系统时间移动到十分钟后
       travel_to(later_time) do
-
         # 4. 将报名状态修改为 waitlisted
         signup.update!(status: "waitlisted")
 
@@ -291,7 +286,6 @@ RSpec.describe Signup, type: :model do
 
       # 5. 将系统时间移动到十分钟后
       travel_to(later_time) do
-
         # 6. 尝试重复加入候补队列
         duplicate_signup = nil
 

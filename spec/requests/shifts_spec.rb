@@ -3,7 +3,6 @@ require 'rails_helper'
 require 'nokogiri'
 
 RSpec.describe "Shifts", type: :request do
-
   # ==================================================
   # 公共测试数据
   # ==================================================
@@ -115,7 +114,6 @@ RSpec.describe "Shifts", type: :request do
   # ==================================================
 
   describe "unauthenticated access" do
-
     # Test 1: 未登录用户不能查看班次列表
     it "redirects unauthenticated users when viewing shifts" do
       get "/activities/#{activity_a.id}/shifts"
@@ -312,7 +310,6 @@ RSpec.describe "Shifts", type: :request do
   # ==================================================
 
   describe "nested resource protection" do
-
     # Test 9: 禁止使用错误的 Activity ID 访问班次
     it "rejects shifts that do not belong to the requested activity" do
       sign_in_as(volunteer)
@@ -348,7 +345,6 @@ RSpec.describe "Shifts", type: :request do
   # ==================================================
 
   describe "shift creation" do
-
     # 创建班次时使用的合法参数
     let(:valid_shift_attributes) do
       {
@@ -363,7 +359,6 @@ RSpec.describe "Shifts", type: :request do
     # ==================================================
 
     context "unauthenticated access" do
-
       # Test 11: 未登录用户不能访问创建班次页面
       it "redirects unauthenticated users when accessing the new shift page" do
         get "/activities/#{activity_a.id}/shifts/new"
@@ -661,7 +656,6 @@ RSpec.describe "Shifts", type: :request do
   # ==================================================
 
   describe "shift editing" do
-
     # 修改班次时使用的合法参数
     let(:updated_shift_attributes) do
       {
@@ -685,7 +679,6 @@ RSpec.describe "Shifts", type: :request do
     # ==================================================
 
     context "unauthenticated access" do
-
       # Test 21: 未登录用户不能查看编辑班次页面
       it "redirects unauthenticated users when accessing the edit shift page" do
         get "/activities/#{activity_a.id}/shifts/#{shift_a1.id}/edit"
@@ -1173,5 +1166,4 @@ RSpec.describe "Shifts", type: :request do
       end
     end
   end
-
 end

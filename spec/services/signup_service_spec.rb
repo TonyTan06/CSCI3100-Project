@@ -3,7 +3,6 @@ require 'rails_helper'
 
 RSpec.describe SignupService do
   describe ".call" do
-
     # Test 1: 班次有空余名额时自动确认报名
     it "automatically confirms a signup when the shift has available capacity" do
       # 1. 创建活动所属的 Organization
@@ -1527,6 +1526,5 @@ RSpec.describe SignupService do
       expect(shift1.reload.capacity).to eq(20)
       expect(shift2.reload.capacity).to eq(20)
     end
-
   end
 end

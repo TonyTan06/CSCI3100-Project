@@ -2,7 +2,6 @@
 require 'rails_helper'
 
 RSpec.describe AttendanceService do
-
   # ==================================================
   # 公共测试数据
   # ==================================================
@@ -104,10 +103,8 @@ RSpec.describe AttendanceService do
   # ==================================================
 
   describe ".call" do
-
     # Test 1: Organizer 可以标记 Volunteer 已出勤
     it "allows an organizer to mark a confirmed volunteer as present" do
-
       expect(signup.attendance_status).to eq("pending")
 
       original_id = signup.id
@@ -141,7 +138,6 @@ RSpec.describe AttendanceService do
 
     # Test 2: Organizer 可以标记 Volunteer 缺席
     it "allows an organizer to mark a confirmed volunteer as absent" do
-
       result = AttendanceService.call(
         user: organizer,
         signup: signup,
@@ -159,7 +155,6 @@ RSpec.describe AttendanceService do
 
     # Test 3: Organizer 可以将缺席修正为已出勤
     it "allows an organizer to correct absent attendance to present" do
-
       signup.update!(
         attendance_status: "absent"
       )
@@ -181,7 +176,6 @@ RSpec.describe AttendanceService do
 
     # Test 4: Organizer 可以将已出勤修正为缺席
     it "allows an organizer to correct present attendance to absent" do
-
       signup.update!(
         attendance_status: "present"
       )
@@ -203,7 +197,6 @@ RSpec.describe AttendanceService do
 
     # Test 5: Organizer 可以将出勤状态重置为 pending
     it "allows an organizer to reset attendance to pending" do
-
       signup.update!(
         attendance_status: "present"
       )
@@ -225,7 +218,6 @@ RSpec.describe AttendanceService do
 
     # Test 6: 禁止 Volunteer 修改出勤状态
     it "rejects attendance updates from volunteers" do
-
       original_updated_at = signup.updated_at
 
       result = AttendanceService.call(
@@ -251,7 +243,6 @@ RSpec.describe AttendanceService do
 
     # Test 7: 禁止 Organizer 修改其他组织的出勤记录
     it "rejects attendance updates for signups belonging to another organization" do
-
       original_updated_at = signup.updated_at
 
       result = AttendanceService.call(
@@ -276,7 +267,6 @@ RSpec.describe AttendanceService do
 
     # Test 8: 禁止修改候补用户的出勤状态
     it "rejects attendance updates for waitlisted signups" do
-
       waitlisted_signup = Signup.create!(
         user: volunteer,
         shift: shift,
@@ -321,7 +311,6 @@ RSpec.describe AttendanceService do
 
     # Test 9: 禁止修改已取消报名用户的出勤状态
     it "rejects attendance updates for cancelled signups" do
-
       cancelled_signup = Signup.create!(
         user: volunteer,
         shift: shift,
@@ -358,7 +347,6 @@ RSpec.describe AttendanceService do
 
     # Test 10: 禁止设置非法出勤状态
     it "rejects invalid attendance status values" do
-
       original_updated_at = signup.updated_at
 
       result = AttendanceService.call(
@@ -387,7 +375,6 @@ RSpec.describe AttendanceService do
 
     # Test 11: 禁止设置空出勤状态
     it "rejects nil attendance status" do
-
       result = AttendanceService.call(
         user: organizer,
         signup: signup,
@@ -408,7 +395,6 @@ RSpec.describe AttendanceService do
 
     # Test 12: 出勤修改不影响报名状态、容量及候补队列
     it "does not affect signup status, capacity or waitlist when attendance changes" do
-
       # 1. 创建正式报名并占用唯一名额
       confirmed_signup = signup
 
@@ -478,7 +464,7 @@ RSpec.describe AttendanceService do
       expect(shift.full?).to be true
 
       expect(shift.waitlist_queue.to_a).to eq(
-        [waitlisted_signup]
+        [ waitlisted_signup ]
       )
     end
   end

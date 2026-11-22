@@ -1,12 +1,9 @@
 
 class CancellationService
-
   # 处理 Volunteer 的取消报名请求
   def self.call(user:, signup:)
-
     # 1. 开启数据库事务
     ActiveRecord::Base.transaction(requires_new: true) do
-
       # 2. 从数据库重新读取报名记录
       signup.reload
 
@@ -58,7 +55,6 @@ class CancellationService
 
       # 8. 返回取消报名结果
       signup
-
     end
   end
 end

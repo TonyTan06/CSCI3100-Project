@@ -3,7 +3,6 @@ require 'rails_helper'
 
 RSpec.describe Shift, type: :model do
   describe "validations" do
-
     # Test 1: 班次必须拥有开始时间
     it "requires a start time" do
       # 1. 创建活动所属的 Organization
@@ -292,7 +291,6 @@ RSpec.describe Shift, type: :model do
   end
 
   describe "associations" do
-
     # Test 10: Activity 可以拥有多个 Shift
     it "allows an activity to have multiple shifts" do
       # 1. 创建活动所属的 Organization

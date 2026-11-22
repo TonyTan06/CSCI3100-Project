@@ -1,12 +1,9 @@
 
 class ShiftUpdateService
-
   # 处理 Organizer 的班次修改请求
   def self.call(user:, shift:, attributes:)
-
     # 1. 开启数据库事务
     ActiveRecord::Base.transaction(requires_new: true) do
-
       # 2. 从数据库重新读取班次记录
       shift.reload
 
@@ -56,7 +53,6 @@ class ShiftUpdateService
 
       # 8. 返回班次修改结果
       shift
-
     end
   end
 end

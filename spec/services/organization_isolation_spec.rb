@@ -2,7 +2,6 @@
 require 'rails_helper'
 
 RSpec.describe "Service organization isolation" do
-
   # ==================================================
   # 公共测试数据
   # ==================================================
@@ -99,10 +98,8 @@ RSpec.describe "Service organization isolation" do
   # ==================================================
 
   describe "protected attributes" do
-
     # Test 1: 禁止修改 Shift 所属 Activity
     it "prevents changing the activity of an existing shift" do
-
       result = ShiftUpdateService.call(
         user: organizer_a,
         shift: shift_a,
@@ -132,7 +129,6 @@ RSpec.describe "Service organization isolation" do
 
     # Test 2: 禁止修改 Shift 的 ID
     it "prevents changing the identity of an existing shift" do
-
       original_id = shift_a.id
       other_shift_id = shift_b.id
 
@@ -161,7 +157,6 @@ RSpec.describe "Service organization isolation" do
 
     # Test 3: 非法修改失败时保留原有数据
     it "preserves stored data when an invalid update includes protected attributes" do
-
       original_capacity = shift_a.capacity
       original_activity_id = shift_a.activity_id
       original_updated_at = shift_a.updated_at
@@ -196,7 +191,6 @@ RSpec.describe "Service organization isolation" do
 
     # Test 4: 字符串类型参数也不能绕过属性过滤
     it "filters protected attributes when attribute keys are strings" do
-
       result = ShiftUpdateService.call(
         user: organizer_a,
         shift: shift_a,
@@ -228,10 +222,8 @@ RSpec.describe "Service organization isolation" do
   # ==================================================
 
   describe "cross-organization permissions" do
-
     # Test 5: Volunteer 可以参加不同组织的活动
     it "allows volunteers to sign up for shifts across organizations" do
-
       signup_a = SignupService.call(
         user: volunteer,
         shift: shift_a
@@ -275,7 +267,6 @@ RSpec.describe "Service organization isolation" do
 
     # Test 6: Organizer 只能管理自己组织活动的出勤
     it "authorizes attendance based on the activity organization" do
-
       # Volunteer 同时参加两个组织的活动
       signup_a = SignupService.call(
         user: volunteer,

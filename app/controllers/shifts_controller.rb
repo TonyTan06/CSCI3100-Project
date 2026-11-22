@@ -3,13 +3,13 @@ class ShiftsController < ApplicationController
   include ShiftSignupDisplay
 
   # 仅允许 Organizer 创建及修改班次
-  before_action :require_organizer, only: [:new, :create, :edit, :update]
+  before_action :require_organizer, only: [ :new, :create, :edit, :update ]
 
   # 检查活动访问权限
   before_action :set_activity
 
   # 查找指定活动下的班次
-  before_action :set_shift, only: [:show, :edit, :update]
+  before_action :set_shift, only: [ :show, :edit, :update ]
 
   # ==================================================
   # 班次查看

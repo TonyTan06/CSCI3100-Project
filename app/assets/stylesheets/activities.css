@@ -367,3 +367,136 @@
     padding: var(--spacing-sm);
   }
 }
+
+/* ==================================================
+   Part 10.3.2 Activity 搜索区域
+   ================================================== */
+
+.activity-search-card {
+  box-sizing: border-box;
+  min-width: 0;
+  margin-bottom: var(--spacing-lg);
+}
+
+.activity-search-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  min-width: 0;
+}
+
+.activity-search-label {
+  display: block;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.activity-search-controls {
+  display: flex;
+  align-items: stretch;
+  gap: var(--spacing-sm);
+  min-width: 0;
+}
+
+.activity-search-field {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.activity-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  width: 19px;
+  height: 19px;
+  color: var(--color-text-secondary);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.activity-search-input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 11px 14px 11px 44px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.activity-search-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.activity-search-input::placeholder {
+  color: #94A3B8;
+}
+
+.activity-search-submit,
+.activity-search-clear {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  justify-content: center;
+  min-height: 44px;
+}
+
+.activity-search-hint,
+.activity-search-feedback {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  overflow-wrap: anywhere;
+}
+
+.activity-search-feedback {
+  margin-bottom: var(--spacing-md);
+}
+
+.activity-search-feedback strong {
+  color: var(--color-text);
+}
+
+/* ==================================================
+   Part 10.3.2 Activity 搜索响应式布局
+   ================================================== */
+
+@media (max-width: 650px) {
+  .activity-search-card {
+    padding: var(--spacing-md);
+  }
+
+  .activity-search-controls {
+    flex-wrap: wrap;
+  }
+
+  .activity-search-field {
+    flex-basis: 100%;
+  }
+
+  .activity-search-submit,
+  .activity-search-clear {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .activity-search-controls {
+    flex-direction: column;
+  }
+
+  .activity-search-submit,
+  .activity-search-clear {
+    width: 100%;
+  }
+}

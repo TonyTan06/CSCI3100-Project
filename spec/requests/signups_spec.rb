@@ -220,7 +220,7 @@ RSpec.describe "Signups", type: :request do
         # 6. 检查班次统计及候补队列
         expect(shift_a.confirmed_count).to eq(1)
         expect(shift_a.available_slots).to eq(0)
-        expect(shift_a.waitlist_queue.to_a).to eq([signup])
+        expect(shift_a.waitlist_queue.to_a).to eq([ signup ])
 
         # 7. 报名成功后跳转至班次详情
         expect(response).to redirect_to(
@@ -319,7 +319,7 @@ RSpec.describe "Signups", type: :request do
         )
 
         expect(shift_a.waitlist_queue.to_a).to eq(
-          [existing_signup]
+          [ existing_signup ]
         )
       end
 
@@ -659,7 +659,7 @@ RSpec.describe "Signups", type: :request do
         expect(shift_a.confirmed_count).to eq(1)
         expect(shift_a.available_slots).to eq(0)
         expect(shift_a.waitlist_queue.to_a).to eq(
-          [signup_c]
+          [ signup_c ]
         )
 
         # 7. 跳转至班次详情
@@ -701,7 +701,7 @@ RSpec.describe "Signups", type: :request do
         signup_c.update!(waitlisted_at: queue_time - 1.minute)
 
         expect(shift_a.waitlist_queue.to_a).to eq(
-          [signup_b, signup_c]
+          [ signup_b, signup_c ]
         )
         original_waitlisted_at = signup_c.waitlisted_at
 
@@ -726,7 +726,7 @@ RSpec.describe "Signups", type: :request do
         expect(shift_a.confirmed_count).to eq(1)
         expect(shift_a.available_slots).to eq(0)
         expect(shift_a.waitlist_queue.to_a).to eq(
-          [signup_c]
+          [ signup_c ]
         )
 
         # 8. 检查取消成功后的跳转
@@ -770,7 +770,7 @@ RSpec.describe "Signups", type: :request do
         signup_c.update!(waitlisted_at: queue_time - 1.minute)
 
         expect(shift_a.waitlist_queue.to_a).to eq(
-          [signup_b, signup_c]
+          [ signup_b, signup_c ]
         )
 
         original_waitlisted_at = signup_b.waitlisted_at
@@ -804,7 +804,7 @@ RSpec.describe "Signups", type: :request do
         expect(shift_a.confirmed_count).to eq(1)
         expect(shift_a.available_slots).to eq(0)
         expect(shift_a.waitlist_queue.to_a).to eq(
-          [signup_b]
+          [ signup_b ]
         )
 
         # 11. 检查取消成功后的跳转
@@ -1201,7 +1201,7 @@ RSpec.describe "Signups", type: :request do
         )
 
         expect(shift_a.waitlist_queue.to_a).to eq(
-          [signup_c, signup_a, signup_d]
+          [ signup_c, signup_a, signup_d ]
         )
 
         # 4. 请求班次详情页面
@@ -1548,5 +1548,4 @@ RSpec.describe "Signups", type: :request do
       end
     end
   end
-
 end

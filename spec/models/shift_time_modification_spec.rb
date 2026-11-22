@@ -3,7 +3,6 @@ require 'rails_helper'
 
 RSpec.describe Shift, type: :model do
   describe "time modification protection" do
-
     # Test 1: 禁止造成已确认报名时间冲突的班次修改
     it "rejects time changes that cause conflicts for confirmed volunteers" do
       # 1. 创建活动所属的 Organization

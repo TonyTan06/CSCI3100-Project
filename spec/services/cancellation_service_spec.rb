@@ -133,7 +133,6 @@ RSpec.describe CancellationService do
   # ==================================================
 
   describe ".call" do
-
     # Test 1: 允许 Volunteer 取消自己的正式报名
     it "allows a volunteer to cancel their confirmed signup" do
       # 1. 创建正式报名记录
@@ -202,7 +201,7 @@ RSpec.describe CancellationService do
 
       # 4. 检查原有候补顺序
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_b, signup_c]
+        [ signup_b, signup_c ]
       )
 
       # 5. 取消 Volunteer A 的正式报名
@@ -224,7 +223,7 @@ RSpec.describe CancellationService do
 
       # 9. 检查剩余候补队列
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_c]
+        [ signup_c ]
       )
 
       # 10. 检查班次重新满员
@@ -297,7 +296,7 @@ RSpec.describe CancellationService do
 
       # 12. 检查剩余候补队列
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_b]
+        [ signup_b ]
       )
     end
 
@@ -343,7 +342,7 @@ RSpec.describe CancellationService do
 
       # 8. 检查候补队列保持不变
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_b]
+        [ signup_b ]
       )
     end
 
@@ -434,7 +433,7 @@ RSpec.describe CancellationService do
 
       # 9. 检查剩余候补队列
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_b]
+        [ signup_b ]
       )
     end
 
@@ -644,7 +643,7 @@ RSpec.describe CancellationService do
 
       # 10. 检查其他班次的候补队列不受影响
       expect(other_shift.waitlist_queue.to_a).to eq(
-        [signup_c]
+        [ signup_c ]
       )
     end
 
@@ -672,7 +671,6 @@ RSpec.describe CancellationService do
       allow(WaitlistService)
         .to receive(:call)
         .with(shift: shift) do
-
           # 模拟已经执行了一次候补转正
           signup_b.update!(status: "confirmed")
 

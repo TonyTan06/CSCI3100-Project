@@ -2,7 +2,6 @@
 require 'rails_helper'
 
 RSpec.describe "Service transaction consistency" do
-
   # ==================================================
   # 公共测试数据
   # ==================================================
@@ -76,7 +75,6 @@ RSpec.describe "Service transaction consistency" do
 
   # 检查 reload 是否在新的业务事务内部执行
   def expect_reload_inside_transaction(record)
-
     connection = ActiveRecord::Base.lease_connection
 
     original_transaction_count =
@@ -85,7 +83,6 @@ RSpec.describe "Service transaction consistency" do
     expect(record)
       .to receive(:reload)
       .and_wrap_original do |original|
-
         # 新的业务事务必须已经开启
         expect(
           connection.open_transactions
@@ -102,7 +99,6 @@ RSpec.describe "Service transaction consistency" do
 
   # Test 1: CancellationService 在事务内读取数据
   it "opens a transaction before reloading a signup for cancellation" do
-
     signup = create_signup(
       user: volunteer_a,
       status: "confirmed"
@@ -124,7 +120,6 @@ RSpec.describe "Service transaction consistency" do
 
   # Test 2: ShiftUpdateService 在事务内读取数据
   it "opens a transaction before reloading a shift for updates" do
-
     organizer
     shift
 
@@ -147,7 +142,6 @@ RSpec.describe "Service transaction consistency" do
 
   # Test 3: AttendanceService 在事务内读取数据
   it "opens a transaction before reloading a signup for attendance updates" do
-
     signup = create_signup(
       user: volunteer_a,
       status: "confirmed"
@@ -172,7 +166,6 @@ RSpec.describe "Service transaction consistency" do
 
   # Test 4: WaitlistService 在事务内读取数据
   it "opens a transaction before reloading a shift for promotion" do
-
     shift
 
     expect_reload_inside_transaction(shift)
@@ -190,7 +183,6 @@ RSpec.describe "Service transaction consistency" do
 
   # Test 5: WaitlistService 必须使用最新容量
   it "uses the latest capacity when promoting with a stale shift object" do
-
     # 1. 将班次容量设置为 1
     shift.update!(capacity: 1)
 
@@ -229,7 +221,7 @@ RSpec.describe "Service transaction consistency" do
 
     # 8. 系统应该根据最新容量完成递补
     expect(promoted_signups).to eq(
-      [signup_b]
+      [ signup_b ]
     )
 
     expect(signup_b.reload.status).to eq(
@@ -248,7 +240,6 @@ RSpec.describe "Service transaction consistency" do
 
   # Test 6: 多人递补过程中发生异常时全部回滚
   it "rolls back all promotions when an unexpected error occurs" do
-
     # 1. 创建两位候补用户
     signup_a = create_signup(
       user: volunteer_a,
@@ -279,13 +270,12 @@ RSpec.describe "Service transaction consistency" do
     # 方便对第二次递补模拟系统异常
     allow(shift)
       .to receive(:waitlist_queue)
-      .and_return([signup_a, signup_b])
+      .and_return([ signup_a, signup_b ])
 
     # 4. 模拟第二位用户递补时发生异常
     allow(signup_b)
       .to receive(:update)
       .with(status: "confirmed") do
-
         # 确认第一位用户已经成功写入数据库
         expect(
           Signup.find(signup_a.id).status

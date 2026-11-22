@@ -120,7 +120,6 @@ RSpec.describe WaitlistService do
   # ==================================================
 
   describe ".call" do
-
     # Test 1: 没有候补用户时不执行递补
     it "does nothing when there are no waitlisted signups" do
       # 1. 检查班次拥有一个空余名额
@@ -228,7 +227,7 @@ RSpec.describe WaitlistService do
       }.not_to change(Signup, :count)
 
       # 6. 检查第一位候补用户是否成功递补
-      expect(promoted_signups).to eq([signup_a])
+      expect(promoted_signups).to eq([ signup_a ])
 
       # 7. 检查第一位用户的数据库状态
       expect(signup_a.reload.status).to eq(
@@ -242,7 +241,7 @@ RSpec.describe WaitlistService do
 
       # 9. 检查候补队列是否已经更新
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_b]
+        [ signup_b ]
       )
 
       # 10. 检查班次是否已经满员
@@ -276,7 +275,7 @@ RSpec.describe WaitlistService do
 
       # 4. 检查原有候补队列顺序
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_a, signup_b, signup_c]
+        [ signup_a, signup_b, signup_c ]
       )
 
       # 5. 调用自动递补 Service
@@ -285,7 +284,7 @@ RSpec.describe WaitlistService do
       )
 
       # 6. 检查递补的是候补时间最早的用户
-      expect(promoted_signups).to eq([signup_a])
+      expect(promoted_signups).to eq([ signup_a ])
 
       # 7. 检查三个报名记录的状态
       expect(signup_a.reload.status).to eq(
@@ -302,7 +301,7 @@ RSpec.describe WaitlistService do
 
       # 8. 检查剩余候补队列的顺序
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_b, signup_c]
+        [ signup_b, signup_c ]
       )
     end
 
@@ -330,7 +329,7 @@ RSpec.describe WaitlistService do
       )
 
       # 5. 检查是否成功递补
-      expect(promoted_signups).to eq([signup])
+      expect(promoted_signups).to eq([ signup ])
 
       # 6. 从数据库重新读取报名记录
       signup.reload
@@ -384,7 +383,7 @@ RSpec.describe WaitlistService do
 
       # 5. 检查候补队列顺序
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_a, signup_b]
+        [ signup_a, signup_b ]
       )
 
       # 6. 调用自动递补 Service
@@ -393,7 +392,7 @@ RSpec.describe WaitlistService do
       )
 
       # 7. 检查是否跳过 A 并成功递补 B
-      expect(promoted_signups).to eq([signup_b])
+      expect(promoted_signups).to eq([ signup_b ])
 
       # 8. 检查 Volunteer A 是否仍然处于候补状态
       expect(signup_a.reload.status).to eq(
@@ -422,7 +421,7 @@ RSpec.describe WaitlistService do
 
       # 13. 检查候补队列仅剩 Volunteer A
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_a]
+        [ signup_a ]
       )
 
       # 14. 检查班次是否已经满员
@@ -489,7 +488,7 @@ RSpec.describe WaitlistService do
 
       # 10. 检查原有候补顺序保持不变
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_a, signup_b]
+        [ signup_a, signup_b ]
       )
 
       # 11. 检查班次仍然保留空余名额
@@ -534,7 +533,7 @@ RSpec.describe WaitlistService do
 
       # 7. 检查前两位候补用户是否成功递补
       expect(promoted_signups).to eq(
-        [signup_a, signup_b]
+        [ signup_a, signup_b ]
       )
 
       # 8. 检查报名状态
@@ -556,7 +555,7 @@ RSpec.describe WaitlistService do
 
       # 10. 检查剩余候补队列
       expect(shift.waitlist_queue.to_a).to eq(
-        [signup_c]
+        [ signup_c ]
       )
 
       # 11. 检查班次没有超过容量上限
@@ -594,7 +593,7 @@ RSpec.describe WaitlistService do
 
       # 5. 检查所有候补用户是否成功递补
       expect(promoted_signups).to eq(
-        [signup_a, signup_b]
+        [ signup_a, signup_b ]
       )
 
       # 6. 检查两个报名是否均为 confirmed
@@ -649,7 +648,7 @@ RSpec.describe WaitlistService do
       )
 
       # 5. 检查仅当前班次的用户成功递补
-      expect(promoted_signups).to eq([signup_a])
+      expect(promoted_signups).to eq([ signup_a ])
 
       # 6. 检查当前班次的报名状态
       expect(signup_a.reload.status).to eq(
@@ -680,7 +679,7 @@ RSpec.describe WaitlistService do
       expect(other_shift.available_slots).to eq(1)
 
       expect(other_shift.waitlist_queue.to_a).to eq(
-        [signup_b]
+        [ signup_b ]
       )
     end
   end

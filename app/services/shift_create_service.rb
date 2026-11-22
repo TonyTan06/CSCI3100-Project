@@ -1,9 +1,7 @@
 
 class ShiftCreateService
-
   # 创建活动班次
   def self.call(user:, activity:, attributes:)
-
     # 1. 初始化 Shift 对象
     shift = Shift.new
 

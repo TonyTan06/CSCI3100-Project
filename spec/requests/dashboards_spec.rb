@@ -240,7 +240,7 @@ RSpec.describe "Dashboards", type: :request do
         expect(document.at_css("#my-signups")).not_to be_nil
 
         # 2. 检查每条报名记录对应的活动及班次信息
-        [signup_a, signup_c, signup_d].each do |signup|
+        [ signup_a, signup_c, signup_d ].each do |signup|
           item = signup_item(document, signup)
           expect(item).not_to be_nil
           item_text = item.text.squish
@@ -293,7 +293,7 @@ RSpec.describe "Dashboards", type: :request do
         expect(response).to have_http_status(:ok)
         document = Nokogiri::HTML(response.body)
 
-        [signup_a, signup_c, signup_d].each do |signup|
+        [ signup_a, signup_c, signup_d ].each do |signup|
           item = signup_item(document, signup)
           expect(item).not_to be_nil
           expect(item.text.squish).to include(
@@ -305,7 +305,7 @@ RSpec.describe "Dashboards", type: :request do
       # Test 6: 仅正式报名显示出勤状态
       it "displays attendance status only for confirmed signups" do
         # 检查三种合法出勤状态
-        ["pending", "present", "absent"].each do |status|
+        [ "pending", "present", "absent" ].each do |status|
           signup_a.update!(attendance_status: status)
 
           get "/dashboard"
@@ -356,7 +356,7 @@ RSpec.describe "Dashboards", type: :request do
         document = Nokogiri::HTML(response.body)
 
         # 1. 当前用户的报名记录应该显示
-        [signup_a, signup_c, signup_d].each do |signup|
+        [ signup_a, signup_c, signup_d ].each do |signup|
           expect(signup_item(document, signup)).not_to be_nil
         end
 
@@ -396,7 +396,7 @@ RSpec.describe "Dashboards", type: :request do
 
         # Shift B 最早，Shift A 其次，Shift C 最晚
         expect(signup_ids).to eq(
-          [signup_c.id, signup_a.id, signup_d.id]
+          [ signup_c.id, signup_a.id, signup_d.id ]
         )
       end
 
@@ -408,7 +408,7 @@ RSpec.describe "Dashboards", type: :request do
         document = Nokogiri::HTML(response.body)
 
         # 1. 每条报名记录均有班次详情入口
-        [signup_a, signup_c, signup_d].each do |signup|
+        [ signup_a, signup_c, signup_d ].each do |signup|
           item = signup_item(document, signup)
           expect(item).not_to be_nil
           shift_path = activity_shift_path(
@@ -568,7 +568,7 @@ RSpec.describe "Dashboards", type: :request do
         expect(document.at_css("#my-activities")).not_to be_nil
 
         # 2. 检查当前组织的两个活动
-        [activity_a, activity_c].each do |activity|
+        [ activity_a, activity_c ].each do |activity|
           item = activity_item(document, activity)
           expect(item).not_to be_nil
           item_text = item.text.squish
@@ -578,7 +578,7 @@ RSpec.describe "Dashboards", type: :request do
         end
 
         # 3. 检查每个班次的信息及所属活动
-        [shift_a, shift_c].each do |shift|
+        [ shift_a, shift_c ].each do |shift|
           item = shift_item(document, shift)
           expect(item).not_to be_nil
           item_text = item.text.squish
@@ -707,7 +707,7 @@ RSpec.describe "Dashboards", type: :request do
 
         # 5. 按开始时间排序，而不是按照创建顺序排序
         expect(shift_ids).to eq(
-          [earlier_shift.id, shift_a.id, later_shift.id]
+          [ earlier_shift.id, shift_a.id, later_shift.id ]
         )
       end
 
@@ -731,7 +731,7 @@ RSpec.describe "Dashboards", type: :request do
         )
 
         # 2. 每个活动的管理入口
-        [activity_a, activity_c].each do |activity|
+        [ activity_a, activity_c ].each do |activity|
           item = activity_item(document, activity)
           expect(item).not_to be_nil
 
@@ -753,7 +753,7 @@ RSpec.describe "Dashboards", type: :request do
         end
 
         # 3. 每个班次的管理入口
-        [shift_a, shift_c].each do |shift|
+        [ shift_a, shift_c ].each do |shift|
           item = shift_item(document, shift)
           expect(item).not_to be_nil
           activity = shift.activity
@@ -1158,7 +1158,7 @@ RSpec.describe "Dashboards", type: :request do
     context "global navigation" do
       # Test 28: 未登录用户显示登录及注册导航
       it "displays sign-in and registration links for unauthenticated users" do
-        [new_session_path, new_registration_path].each do |path|
+        [ new_session_path, new_registration_path ].each do |path|
           # 1. 请求登录或注册页面
           get path
           expect(response).to have_http_status(:ok)
@@ -1276,5 +1276,4 @@ RSpec.describe "Dashboards", type: :request do
       end
     end
   end
-
 end

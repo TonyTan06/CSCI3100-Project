@@ -1,12 +1,9 @@
 
 class WaitlistService
-
   # 自动递补当前班次中的合格候补用户
   def self.call(shift:)
-
     # 1. 开启数据库事务
     ActiveRecord::Base.transaction(requires_new: true) do
-
       # 2. 从数据库重新读取班次记录
       shift.reload
 
@@ -21,7 +18,6 @@ class WaitlistService
 
       # 6. 按照候补顺序遍历所有报名记录
       waitlisted_signups.each do |signup|
-
         # 6.1 如果班次已经满员，则停止递补
         break if shift.full?
 
@@ -41,7 +37,6 @@ class WaitlistService
 
       # 7. 返回所有成功递补的报名记录
       promoted_signups
-
     end
   end
 end

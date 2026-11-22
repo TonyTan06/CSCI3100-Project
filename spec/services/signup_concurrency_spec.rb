@@ -4,7 +4,6 @@ require 'securerandom'
 require 'timeout'
 
 RSpec.describe "Signup concurrency", type: :model do
-
   # 仅对当前测试组关闭自动测试事务
   self.use_transactional_tests = false
 
@@ -13,7 +12,6 @@ RSpec.describe "Signup concurrency", type: :model do
   # ==================================================
 
   before do
-
     # 安全检查：只允许在测试环境中运行
     raise "Test environment required" unless Rails.env.test?
 
@@ -61,7 +59,6 @@ RSpec.describe "Signup concurrency", type: :model do
   # ==================================================
 
   after do
-
     # 安全检查：禁止在非测试环境中删除数据
     next unless Rails.env.test?
 
@@ -91,7 +88,6 @@ RSpec.describe "Signup concurrency", type: :model do
 
   # 创建 Volunteer
   def create_volunteer(name)
-
     user = User.create!(
       email_address: "#{name}_#{@token}@example.com",
       password: "password123",
@@ -105,7 +101,6 @@ RSpec.describe "Signup concurrency", type: :model do
 
   # 创建当前测试组织的 Organizer
   def create_organizer
-
     organizer = User.create!(
       email_address: "organizer_#{@token}@example.com",
       password: "password123",
@@ -121,7 +116,6 @@ RSpec.describe "Signup concurrency", type: :model do
 
   # 创建班次
   def create_shift(start_time:, end_time:, capacity:)
-
     shift = Shift.create!(
       activity: @activity,
       start_time: start_time,
@@ -136,7 +130,6 @@ RSpec.describe "Signup concurrency", type: :model do
 
   # 同时执行多个业务请求
   def run_concurrent_requests(requests)
-
     # 用于记录已经准备完成的线程
     ready_queue = Queue.new
 
@@ -146,14 +139,10 @@ RSpec.describe "Signup concurrency", type: :model do
     threads = []
 
     requests.each do |request|
-
       threads << Thread.new(request) do |operation|
-
         Rails.application.executor.wrap do
-
           # 为每个线程获取独立的数据库连接
           ActiveRecord::Base.connection_pool.with_connection do |connection|
-
             # 1. 在当前线程中重新读取用户和班次
             user = User.find(operation[:user_id])
             shift = Shift.find(operation[:shift_id])
@@ -236,7 +225,6 @@ RSpec.describe "Signup concurrency", type: :model do
 
     # 设置超时，避免测试无限等待
     Timeout.timeout(20) do
-
       # 等待所有线程准备完成
       connection_ids = requests.size.times.map do
         ready_queue.pop
@@ -279,7 +267,6 @@ RSpec.describe "Signup concurrency", type: :model do
 
   # Test 1: 两个 Volunteer 同时争抢最后一个名额
   it "prevents overbooking when volunteers sign up concurrently" do
-
     # 1. 检查初始容量
     expect(@shift.capacity).to eq(1)
     expect(@shift.confirmed_count).to eq(0)
@@ -326,7 +313,6 @@ RSpec.describe "Signup concurrency", type: :model do
 
   # Test 2: 同一个 Volunteer 同时提交两次报名
   it "prevents duplicate signups from concurrent requests" do
-
     # 1. 同一个 Volunteer 同时提交两次报名
     results = run_concurrent_requests([
       {
@@ -376,7 +362,6 @@ RSpec.describe "Signup concurrency", type: :model do
 
   # Test 3: 同一个 Volunteer 同时报名冲突班次
   it "prevents conflicting confirmed signups from concurrent requests" do
-
     # 1. 创建与原班次时间重叠的另一个班次
     conflicting_shift = create_shift(
       start_time: @start_time + 2.hours,
@@ -448,7 +433,6 @@ RSpec.describe "Signup concurrency", type: :model do
 
   # Test 4: 并发取消和报名时保护候补优先权
   it "preserves waitlist priority during concurrent cancellation and signup" do
-
     volunteer_c = create_volunteer("c")
 
     # 1. Volunteer A 占用唯一正式名额
@@ -504,7 +488,7 @@ RSpec.describe "Signup concurrency", type: :model do
     expect(@shift.available_slots).to eq(0)
 
     expect(@shift.waitlist_queue.to_a).to eq(
-      [signup_c]
+      [ signup_c ]
     )
 
     expect(@shift.signups.count).to eq(3)
@@ -512,7 +496,6 @@ RSpec.describe "Signup concurrency", type: :model do
 
   # Test 5: 并发增加容量和报名时保护候补优先权
   it "preserves waitlist priority during concurrent capacity increase and signup" do
-
     organizer = create_organizer
     volunteer_c = create_volunteer("c")
 
@@ -570,7 +553,7 @@ RSpec.describe "Signup concurrency", type: :model do
     expect(@shift.available_slots).to eq(0)
 
     expect(@shift.waitlist_queue.to_a).to eq(
-      [signup_c]
+      [ signup_c ]
     )
 
     expect(@shift.signups.count).to eq(3)
@@ -578,7 +561,6 @@ RSpec.describe "Signup concurrency", type: :model do
 
   # Test 6: 并发减少容量和报名时防止超额报名
   it "maintains valid capacity during concurrent capacity decrease and signup" do
-
     organizer = create_organizer
 
     # 1. 将初始容量设置为 2

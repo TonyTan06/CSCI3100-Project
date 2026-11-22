@@ -3,7 +3,6 @@ require 'rails_helper'
 
 RSpec.describe Signup, type: :model do
   describe "time conflict detection" do
-
     # Test 1: 禁止同一个 Volunteer 报名时间重叠的班次
     it "rejects overlapping confirmed signups for the same user" do
       # 1. 创建活动所属的 Organization

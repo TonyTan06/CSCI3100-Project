@@ -11,6 +11,6 @@ class CreateSignups < ActiveRecord::Migration[8.1]
     end
 
     # 防止同一个用户重复报名同一个班次
-    add_index :signups, [:user_id, :shift_id], unique: true
+    add_index :signups, [ :user_id, :shift_id ], unique: true
   end
 end

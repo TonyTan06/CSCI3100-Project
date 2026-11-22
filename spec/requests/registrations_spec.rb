@@ -3,7 +3,6 @@ require 'rails_helper'
 
 RSpec.describe "Registrations", type: :request do
   describe "GET /registration/new" do
-
     # Test 1: 未登录用户可以访问注册页面
     it "allows unauthenticated users to access the registration page" do
       # 1. 向注册页面发送 GET 请求
@@ -52,7 +51,6 @@ RSpec.describe "Registrations", type: :request do
   end
 
   describe "POST /registration" do
-
     # Test 6: 有效注册信息可以成功创建用户
     it "creates a user with valid information" do
       # 1. 准备有效的注册数据

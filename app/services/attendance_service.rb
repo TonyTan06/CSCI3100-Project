@@ -1,12 +1,9 @@
 
 class AttendanceService
-
   # 处理 Organizer 的出勤管理请求
   def self.call(user:, signup:, attendance_status:)
-
     # 1. 开启数据库事务
     ActiveRecord::Base.transaction(requires_new: true) do
-
       # 2. 从数据库重新读取报名记录
       signup.reload
 
@@ -49,7 +46,6 @@ class AttendanceService
 
       # 7. 返回出勤修改结果
       signup
-
     end
   end
 end
