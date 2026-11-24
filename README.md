@@ -1215,8 +1215,10 @@ operate as expected.
 - GitHub Actions:
   https://github.com/TonyTan06/CSCI3100-Project/actions
 
-- Final Submission CI Run:
-  [To be updated with the CI run for the submitted commit]
+- Verified CI Run:
+  [Successful CI Run](https://github.com/TonyTan06/CSCI3100-Project/actions/runs/45368405908)
+- Verified Commit:
+  `ae3c59e550afaa40d2752522b5e5208345dd510f`
 
 - Live Application:
   https://csci3100-project-production.up.railway.app/
