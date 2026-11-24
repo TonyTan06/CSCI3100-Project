@@ -3,7 +3,8 @@ class Shift < ApplicationRecord
   belongs_to :activity
 
   # 一个 Shift 可以拥有多个报名记录
-  has_many :signups
+  # 存在任何报名记录时，禁止删除该班次
+  has_many :signups, dependent: :restrict_with_error
 
   # 班次必须拥有开始时间
   validates :start_time, presence: true

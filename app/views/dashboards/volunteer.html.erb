@@ -162,8 +162,9 @@
   <% end %>
 </section>
 
-<% if @signups.any? %>
-  <div class="dashboard-actions">
+<div class="dashboard-actions">
+  <% if @signups.any? %>
     <%= link_to "Browse Activities", activities_path, class: "btn btn-primary" %>
-  </div>
-<% end %>
+  <% end %>
+  <%= link_to "Browse Shifts", shifts_path, class: "btn btn-secondary" %>
+</div>

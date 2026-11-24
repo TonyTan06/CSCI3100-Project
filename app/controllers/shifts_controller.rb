@@ -2,18 +2,33 @@
 class ShiftsController < ApplicationController
   include ShiftSignupDisplay
 
-  # 仅允许 Organizer 创建及修改班次
-  before_action :require_organizer, only: [ :new, :create, :edit, :update ]
+  # 仅允许 Organizer 创建、修改及删除班次
+  before_action :require_organizer, only: [ :new, :create, :edit, :update, :destroy ]
 
-  # 检查活动访问权限
-  before_action :set_activity
+  # 检查活动访问权限（班次总列表不需要指定活动）
+  before_action :set_activity, except: [ :all ]
 
   # 查找指定活动下的班次
-  before_action :set_shift, only: [ :show, :edit, :update ]
+  before_action :set_shift, only: [ :show, :edit, :update, :destroy ]
 
   # ==================================================
   # 班次查看
   # ==================================================
+
+  # GET /shifts
+  # 显示当前用户有权访问的所有班次
+  def all
+    # 1. 根据当前用户角色获取可访问的活动
+    activities = accessible_activities
+
+    # 2. 查询这些活动所属的全部班次
+    # 3. 提前加载活动及组织信息
+    # 4. 按照开始时间及班次 ID 排序
+    @shifts = Shift
+      .where(activity_id: activities.select(:id))
+      .includes(activity: :organization)
+      .order(:start_time, :id)
+  end
 
   # GET /activities/:activity_id/shifts
   # 显示指定活动的所有班次
@@ -87,6 +102,33 @@ class ShiftsController < ApplicationController
     else
       # 2.2 更新失败，重新显示编辑页面
       render :edit, status: 422
+    end
+  end
+
+  # ==================================================
+  # 班次删除
+  # ==================================================
+
+  # DELETE /activities/:activity_id/shifts/:id
+  # 处理班次删除请求
+  def destroy
+    # 1. 调用 ShiftDestroyService 删除班次
+    @shift = ShiftDestroyService.call(
+      user: Current.user,
+      shift: @shift
+    )
+
+    # 2. 检查班次是否成功删除
+    if @shift.destroyed?
+      # 2.1 删除成功，跳转至活动的班次列表
+      redirect_to activity_shifts_path(@activity),
+                  notice: "Shift deleted successfully.",
+                  status: :see_other
+    else
+      # 2.2 删除失败，返回班次详情并显示错误信息
+      redirect_to activity_shift_path(@activity, @shift),
+                  alert: @shift.errors.full_messages.to_sentence.presence || "Unable to delete shift.",
+                  status: :see_other
     end
   end
 

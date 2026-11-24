@@ -11,9 +11,12 @@ Rails.application.routes.draw do
          as: :dev_switch_account
   end
 
+  # 班次总列表路由
+  get "shifts", to: "shifts#all", as: :shifts
+
   # 活动、班次、报名及出勤管理路由
   resources :activities, only: [ :index, :show, :new, :create, :edit, :update ] do
-    resources :shifts, only: [ :index, :show, :new, :create, :edit, :update ] do
+    resources :shifts, only: [ :index, :show, :new, :create, :edit, :update, :destroy ] do
       resources :signups, only: [ :create, :destroy ]
       resources :attendances, only: [ :index, :update ]
     end
