@@ -1,5 +1,5 @@
 
-<section class="auth-card">
+<section class="auth-card" data-controller="demo-account">
   <div class="auth-header">
     <div class="auth-logo">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -23,7 +23,8 @@
                              autocomplete: "username",
                              placeholder: "Enter your email address",
                              value: params[:email_address],
-                             class: "auth-input" %>
+                             class: "auth-input",
+                             data: { demo_account_target: "email" } %>
       </div>
     </div>
     <div class="auth-field">
@@ -38,7 +39,8 @@
                                 autocomplete: "current-password",
                                 placeholder: "Enter your password",
                                 maxlength: 72,
-                                class: "auth-input" %>
+                                class: "auth-input",
+                                data: { demo_account_target: "password" } %>
       </div>
     </div>
     <div class="auth-options">
@@ -46,6 +48,50 @@
     </div>
     <%= form.submit "Sign in", class: "btn btn-primary btn-block auth-submit" %>
   <% end %>
+
+  <div class="demo-accounts">
+    <h2>Demo Accounts</h2>
+    <p>Select a demo account to fill in the login form.</p>
+
+    <div class="demo-account-grid">
+      <button type="button"
+              class="btn demo-account-btn"
+              data-action="click->demo-account#fill"
+              data-email="volunteer1@example.com"
+              data-password="password123">
+        Volunteer 1
+      </button>
+
+      <button type="button"
+              class="btn demo-account-btn"
+              data-action="click->demo-account#fill"
+              data-email="volunteer2@example.com"
+              data-password="password123">
+        Volunteer 2
+      </button>
+
+      <button type="button"
+              class="btn demo-account-btn"
+              data-action="click->demo-account#fill"
+              data-email="organizer1@example.com"
+              data-password="password123">
+        Organizer 1
+      </button>
+
+      <button type="button"
+              class="btn demo-account-btn"
+              data-action="click->demo-account#fill"
+              data-email="organizer2@example.com"
+              data-password="password123">
+        Organizer 2
+      </button>
+    </div>
+
+    <p class="demo-account-note">
+      Course demonstration only. Not an official CUHK service.
+    </p>
+  </div>
+
   <div class="auth-footer">
     <p>
       Don't have an account?
